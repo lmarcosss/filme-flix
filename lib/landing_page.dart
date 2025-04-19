@@ -12,79 +12,75 @@ class LandingPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Material(
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              "assets/images/the_last_jedi.jpeg",
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            height: size.height * 0.36,
-            width: size.width,
-            padding: const EdgeInsets.symmetric(vertical: 29, horizontal: 19),
-            decoration: BoxDecoration(
-              color: Color(0xE6000000),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text("Watch movies anytime anywhere",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
-                const Text(
-                    "Explore a vast collection of blockbuster movies, timeless classics, and the latest releases.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    )),
-                PrimaryButton(
-                  padding: const EdgeInsets.only(
-                    left: 8,
-                    right: 8,
-                    top: 16,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
-                    );
-                  },
-                  text: "Login",
-                ),
-                SecondaryButton(
-                  padding: const EdgeInsets.only(
-                    left: 8,
-                    right: 8,
-                    top: 16,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignUpPage(),
-                      ),
-                    );
-                  },
-                  text: "Sign Up",
-                )
-              ],
-            ),
-          )
-        ],
+        child: Stack(alignment: Alignment.bottomCenter, children: [
+      Positioned.fill(
+        child: Image.asset(
+          "assets/images/the_last_jedi.jpeg",
+          fit: BoxFit.cover,
+        ),
       ),
-    );
+      Container(
+        height: size.height * 0.36,
+        width: size.width,
+        padding: const EdgeInsets.symmetric(vertical: 29, horizontal: 19),
+        decoration: BoxDecoration(
+          color: Color(0xE6000000),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("Watch movies anytime anywhere",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+            const Text(
+                "Explore a vast collection of blockbuster movies, timeless classics, and the latest releases.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                )),
+            PrimaryButton(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+                top: 16,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              },
+              text: "Login",
+            ),
+            SecondaryButton(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+                top: 16,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignUpPage(),
+                  ),
+                );
+              },
+              text: "Sign Up",
+            )
+          ],
+        ),
+      )
+    ]));
   }
 }
