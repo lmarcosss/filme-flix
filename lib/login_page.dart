@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
           keyboardType: TextInputType.emailAddress,
           icon: Icon(Icons.email, color: colorScheme.primary),
         ),
+        SizedBox(height: 8),
         PasswordInput(text: "Password"),
         PrimaryButton(
             onPressed: onLogin,
