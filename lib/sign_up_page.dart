@@ -30,10 +30,12 @@ class SignUpPage extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           icon: Icon(Icons.email, color: colorScheme.primary),
         ),
+        SizedBox(height: 8),
         CommmonInput(
           text: "Username",
           icon: Icon(Icons.person, color: colorScheme.primary),
         ),
+        SizedBox(height: 8),
         PasswordInput(text: "Password"),
         PrimaryButton(
             onPressed: () {},

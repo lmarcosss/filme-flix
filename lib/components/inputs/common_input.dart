@@ -9,9 +9,12 @@ class CommmonInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextField(
+          style: TextStyle(color: colorScheme.primary),
           keyboardType: keyboardType ?? TextInputType.text,
           decoration: InputDecoration(
             labelText: text,
