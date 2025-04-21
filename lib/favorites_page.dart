@@ -1,3 +1,6 @@
+import 'package:filme_flix/components/header/header.dart';
+import 'package:filme_flix/components/movie/movie_item.dart';
+import 'package:filme_flix/home_page.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -6,8 +9,20 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-      children: [],
-    ));
+        appBar: Header(title: "Favorites"),
+        body: ListView.builder(
+            itemCount: movies.length,
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              Movie movie = movies[index];
+
+              return MovieItem(
+                title: movie.title,
+                imageUrl: movie.imageUrl,
+                releaseYear: movie.releaseYear,
+              );
+            }));
   }
 }
