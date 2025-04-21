@@ -1,7 +1,7 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/buttons/secondary_button.dart';
-import 'package:filme_flix/login_page.dart';
-import 'package:filme_flix/sign_up_page.dart';
+import 'package:filme_flix/pages/login_page.dart';
+import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
 import 'package:filme_flix/components/nav_bar/logged_nav_bar.dart';
-import 'package:filme_flix/sign_up_page.dart';
+import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
