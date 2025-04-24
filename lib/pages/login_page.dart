@@ -1,9 +1,8 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
-import 'package:filme_flix/components/nav_bar/logged_nav_bar.dart';
-import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,11 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     final colorScheme = Theme.of(context).colorScheme;
 
     void onLogin() {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const LoggedNavBar()),
-        (Route<dynamic> route) => false,
-      );
+      context.go("/home");
     }
 
     return Material(
@@ -60,12 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.blueAccent),
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignUpPage(),
-                    ),
-                  );
+                  context.replace("/sign-up");
                 })
           ],
         )
