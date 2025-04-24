@@ -53,19 +53,6 @@ class Carousel extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            movie.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(movie.releaseYear,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 13,
-                              )),
                         ],
                       ),
                     );
