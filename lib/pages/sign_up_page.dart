@@ -1,6 +1,7 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
+import 'package:filme_flix/routes/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -51,7 +52,7 @@ class SignUpPage extends StatelessWidget {
                   style: TextStyle(color: Colors.blueAccent),
                 ),
                 onTap: () {
-                  context.replace("/login");
+                  context.replace(RoutesConstants.login);
                 })
           ],
         )

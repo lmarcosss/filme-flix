@@ -6,19 +6,20 @@ import 'package:filme_flix/pages/login_page.dart';
 import 'package:filme_flix/pages/search_page.dart';
 import 'package:filme_flix/pages/settings_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
+import 'package:filme_flix/routes/constants.dart';
 import 'package:go_router/go_router.dart';
 
-final router = GoRouter(initialLocation: '/', routes: [
+final router = GoRouter(initialLocation: RoutesConstants.landing, routes: [
   GoRoute(
-    path: '/',
+    path: RoutesConstants.landing,
     builder: (context, state) => LandingPage(),
   ),
   GoRoute(
-    path: '/login',
+    path: RoutesConstants.login,
     builder: (context, state) => LoginPage(),
   ),
   GoRoute(
-    path: '/sign-up',
+    path: RoutesConstants.signUp,
     builder: (context, state) => SignUpPage(),
   ),
   ShellRoute(
@@ -36,25 +37,25 @@ final router = GoRouter(initialLocation: '/', routes: [
       },
       routes: [
         GoRoute(
-          path: '/home',
+          path: RoutesConstants.home,
           pageBuilder: (_, __) => NoTransitionPage(
             child: HomePage(),
           ),
         ),
         GoRoute(
-          path: '/search',
+          path: RoutesConstants.search,
           pageBuilder: (_, __) => NoTransitionPage(
             child: SearchPage(),
           ),
         ),
         GoRoute(
-          path: '/favorites',
+          path: RoutesConstants.favorites,
           pageBuilder: (_, __) => NoTransitionPage(
             child: FavoritesPage(),
           ),
         ),
         GoRoute(
-          path: '/settings',
+          path: RoutesConstants.settings,
           pageBuilder: (_, __) => NoTransitionPage(
             child: SettingsPage(),
           ),

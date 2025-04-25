@@ -1,4 +1,4 @@
-import 'package:filme_flix/routes.dart';
+import 'package:filme_flix/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

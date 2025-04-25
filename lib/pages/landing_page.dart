@@ -1,5 +1,6 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/buttons/secondary_button.dart';
+import 'package:filme_flix/routes/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,7 +53,7 @@ class LandingPage extends StatelessWidget {
                 top: 16,
               ),
               onPressed: () {
-                context.go("/login");
+                context.go(RoutesConstants.login);
               },
               text: "Login",
             ),
@@ -63,7 +64,7 @@ class LandingPage extends StatelessWidget {
                 top: 16,
               ),
               onPressed: () {
-                context.go("/sign-up");
+                context.go(RoutesConstants.signUp);
               },
               text: "Sign Up",
             )

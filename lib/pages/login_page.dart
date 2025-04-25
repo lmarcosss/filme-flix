@@ -1,6 +1,7 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
+import 'package:filme_flix/routes/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     final colorScheme = Theme.of(context).colorScheme;
 
     void onLogin() {
-      context.go("/home");
+      context.go(RoutesConstants.home);
     }
 
     return Material(
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.blueAccent),
                 ),
                 onTap: () {
-                  context.replace("/sign-up");
+                  context.replace(RoutesConstants.signUp);
                 })
           ],
         )
