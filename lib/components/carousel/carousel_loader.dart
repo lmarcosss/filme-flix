@@ -14,7 +14,7 @@ class CarouselLoader extends StatelessWidget {
           child: Align(
               alignment: Alignment.topLeft,
               child: SizedBox(
-                  width: 134,
+                  width: 132,
                   child: Shimmer.fromColors(
                       baseColor: Colors.grey.shade300,
                       highlightColor: Colors.grey.shade100,
@@ -22,7 +22,7 @@ class CarouselLoader extends StatelessWidget {
                         height: 20,
                         decoration: BoxDecoration(
                           color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(9),
                         ),
                       ))))),
       SizedBox(

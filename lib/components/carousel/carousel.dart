@@ -1,3 +1,4 @@
+import 'package:filme_flix/components/carousel/carousel_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,10 @@ class Carousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (movies.isEmpty) {
+      return CarouselLoader();
+    }
+
     return Padding(
         padding: const EdgeInsets.only(
           left: 16,
@@ -49,7 +54,7 @@ class Carousel extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                movie.posterPath,
+                                Movie.getImageUrl(movie.posterPath),
                                 fit: BoxFit.cover,
                               ),
                             ),
