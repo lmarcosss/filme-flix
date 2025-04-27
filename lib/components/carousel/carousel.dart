@@ -1,4 +1,4 @@
-import 'package:filme_flix/pages/home_page.dart';
+import 'package:filme_flix/models/movie_model.dart';
 import 'package:flutter/material.dart';
 
 class Carousel extends StatelessWidget {
@@ -45,10 +45,11 @@ class Carousel extends StatelessWidget {
                         children: [
                           SizedBox(
                             width: 130,
+                            height: 200,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                movie.imageUrl,
+                                movie.posterPath,
                                 fit: BoxFit.cover,
                               ),
                             ),
