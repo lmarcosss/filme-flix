@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SearchInput extends StatelessWidget {
-  const SearchInput({super.key});
+  final TextEditingController controller;
+
+  const SearchInput({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +12,7 @@ class SearchInput extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextField(
+          controller: controller,
           style: TextStyle(color: colorScheme.primary),
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
@@ -24,8 +27,15 @@ class SearchInput extends StatelessWidget {
             labelStyle: TextStyle(
               color: colorScheme.primary,
             ),
-            prefixIcon: Icon(Icons.menu, color: colorScheme.primary),
-            suffixIcon: Icon(Icons.search, color: colorScheme.primary),
+            prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+            suffixIcon: controller.text.isNotEmpty
+                ? IconButton(
+                    icon: Icon(Icons.clear, color: colorScheme.primary),
+                    onPressed: () {
+                      controller.clear();
+                    },
+                  )
+                : null,
           ),
         ));
   }

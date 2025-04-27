@@ -9,24 +9,28 @@ final List<Movie> movies = [
     title: 'Inception',
     posterPath:
         'https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg',
+    releaseDate: '2010-07-16',
   ),
   Movie(
     id: 2,
     title: 'Dune',
     posterPath:
         'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg',
+    releaseDate: '2021-09-15',
   ),
   Movie(
     id: 3,
     title: 'Openheimer',
     posterPath:
         'https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg',
+    releaseDate: '2023-07-19',
   ),
   Movie(
     id: 4,
     title: 'Batman',
     posterPath:
         'https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg',
+    releaseDate: '2022-03-01',
   ),
 ];
 
@@ -81,7 +85,10 @@ class _HomePageState extends State<HomePage> {
           fit: BoxFit.cover,
           width: double.infinity,
         ),
-        Carousel(title: "Populares Movies", movies: movies),
+        Carousel(
+          title: "Popular Movies",
+          movies: movies,
+        ),
       ],
     ));
   }
