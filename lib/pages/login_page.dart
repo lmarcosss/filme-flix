@@ -1,11 +1,14 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
-import 'package:filme_flix/routes/constants.dart';
+import 'package:filme_flix/pages/home_page.dart';
+import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String route = "/login";
+
   const LoginPage({super.key});
 
   @override
@@ -18,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     final colorScheme = Theme.of(context).colorScheme;
 
     void onLogin() {
-      context.go(RoutesConstants.home);
+      context.go(HomePage.route);
     }
 
     return Material(
@@ -56,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.blueAccent),
                 ),
                 onTap: () {
-                  context.replace(RoutesConstants.signUp);
+                  context.replace(SignUpPage.route);
                 })
           ],
         )

@@ -1,4 +1,7 @@
-import 'package:filme_flix/routes/constants.dart';
+import 'package:filme_flix/pages/favorites_page.dart';
+import 'package:filme_flix/pages/home_page.dart';
+import 'package:filme_flix/pages/search_page.dart';
+import 'package:filme_flix/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,10 +16,10 @@ class LoggedNavBar extends StatefulWidget {
 
 class _LoggedNavBarState extends State<LoggedNavBar> {
   final tabs = [
-    RoutesConstants.home,
-    RoutesConstants.search,
-    RoutesConstants.favorites,
-    RoutesConstants.settings,
+    HomePage.route,
+    SearchPage.route,
+    FavoritesPage.route,
+    SettingsPage.route,
   ];
 
   void changePage(int index) {
