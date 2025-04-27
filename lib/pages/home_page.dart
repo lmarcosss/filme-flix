@@ -1,5 +1,4 @@
 import 'package:filme_flix/components/carousel/carousel.dart';
-import 'package:filme_flix/components/carousel/carousel_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +30,45 @@ final List<Movie> movies = [
   ),
 ];
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const String route = "/home";
 
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late MovieRepository movieRepository;
+  late List<Movie> movies = [];
+
+  @override
+  void initState() {
+    movieRepository = MovieRepository();
+
+    getMovies();
+
+    super.initState();
+  }
+
+  Future<void> getMovies() async {
+    final moviesDb = await movieRepository.getPopularMoviesFromDb();
+
+    if (moviesDb.isNotEmpty) {
+      setState(() {
+        movies = moviesDb;
+      });
+    }
+
+    final moviesApi = await movieRepository.getPopularMovies();
+
+    if (moviesApi.isNotEmpty) {
+      setState(() {
+        movies = moviesApi;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,24 +81,7 @@ class HomePage extends StatelessWidget {
           fit: BoxFit.cover,
           width: double.infinity,
         ),
-        FutureBuilder(
-            future: MovieRepository().getMovies(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CarouselLoader();
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Center(child: Text('No movies found.'));
-              } else {
-                final movies = snapshot.data ?? [];
-
-                return Carousel(
-                  title: "Popular Movies",
-                  movies: movies,
-                );
-              }
-            }),
+        Carousel(title: "Populares Movies", movies: movies),
       ],
     ));
   }

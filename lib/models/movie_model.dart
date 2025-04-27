@@ -13,7 +13,7 @@ class Movie {
     return Movie(
       id: json['id'],
       title: json['title'],
-      posterPath: 'https://image.tmdb.org/t/p/original${json['poster_path']}',
+      posterPath: json['poster_path'],
     );
   }
 
@@ -23,5 +23,9 @@ class Movie {
       'title': title,
       'poster_path': posterPath,
     };
+  }
+
+  static String getImageUrl(String path) {
+    return "https://image.tmdb.org/t/p/original$path";
   }
 }
