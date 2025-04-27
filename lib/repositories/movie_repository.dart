@@ -54,4 +54,17 @@ class MovieRepository {
 
     return movies.map((movie) => Movie.fromJson(jsonDecode(movie))).toList();
   }
+
+  Future<List<Movie>> searchMovies(String searchText) async {
+    final response = await client.get("/search/movie", queryParameters: {
+      'page': 1,
+      'query': searchText,
+    });
+
+    final movies = (response.data['results'] as List)
+        .map((movie) => Movie.fromJson(movie))
+        .toList();
+
+    return movies;
+  }
 }

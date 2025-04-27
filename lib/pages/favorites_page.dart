@@ -23,6 +23,7 @@ class FavoritesPage extends StatelessWidget {
               return MovieItem(
                 title: movie.title,
                 imageUrl: movie.posterPath,
+                releaseDate: movie.releaseDate,
               );
             }));
   }
