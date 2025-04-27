@@ -1,10 +1,13 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/buttons/secondary_button.dart';
-import 'package:filme_flix/routes/constants.dart';
+import 'package:filme_flix/pages/login_page.dart';
+import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LandingPage extends StatelessWidget {
+  static const String route = "/";
+
   const LandingPage({super.key});
 
   @override
@@ -53,7 +56,7 @@ class LandingPage extends StatelessWidget {
                 top: 16,
               ),
               onPressed: () {
-                context.go(RoutesConstants.login);
+                context.go(LoginPage.route);
               },
               text: "Login",
             ),
@@ -64,7 +67,7 @@ class LandingPage extends StatelessWidget {
                 top: 16,
               ),
               onPressed: () {
-                context.go(RoutesConstants.signUp);
+                context.go(SignUpPage.route);
               },
               text: "Sign Up",
             )
