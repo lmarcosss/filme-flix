@@ -1,16 +1,20 @@
 # Filme Flix
 
-A new Flutter project.
+This is a Flutter study project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Create `env.json` file and include this three variables:
 
-A few resources to get you started if this is your first Flutter project:
+```
+{
+    "API_KEY": "YOUR API_KEY FROM themoviedb.org",
+    "API_TOKEN": "YOUR API_TOKEN FROM themoviedb.org",
+    "BASE_URL": "https://api.themoviedb.org/3"
+}
+```
+After that it's possible to run the project using:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter run --dart-define-from-file=env.json
+```

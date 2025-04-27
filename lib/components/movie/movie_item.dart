@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 class MovieItem extends StatelessWidget {
   final String imageUrl;
   final String title;
-  final String releaseYear;
   const MovieItem({
     super.key,
     required this.imageUrl,
     required this.title,
-    required this.releaseYear,
   });
 
   @override
@@ -34,14 +32,6 @@ class MovieItem extends StatelessWidget {
               ),
               const SizedBox(
                 height: 6,
-              ),
-              Text(
-                releaseYear,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                ),
               ),
             ],
           )

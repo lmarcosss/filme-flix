@@ -1,42 +1,39 @@
 import 'package:filme_flix/components/carousel/carousel.dart';
+import 'package:filme_flix/components/carousel/carousel_loader.dart';
+import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:flutter/material.dart';
-
-class Movie {
-  final String title;
-  final String imageUrl;
-  final String releaseYear;
-
-  Movie({
-    required this.title,
-    required this.imageUrl,
-    required this.releaseYear,
-  });
-}
 
 final List<Movie> movies = [
   Movie(
+    id: 1,
     title: 'Inception',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg',
-    releaseYear: '2010',
+    posterPath:
+        'https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg',
   ),
   Movie(
-    title: 'Duna',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg',
-    releaseYear: '2021',
+    id: 2,
+    title: 'Dune',
+    posterPath:
+        'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg',
   ),
   Movie(
-    title: 'Oppenheimer',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg',
-    releaseYear: '2023',
+    id: 3,
+    title: 'Openheimer',
+    posterPath:
+        'https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg',
   ),
   Movie(
+    id: 4,
     title: 'Batman',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg',
-    releaseYear: '2022',
+    posterPath:
+        'https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg',
   ),
-]; // TODO: Remove this list when integrating with the API
+];
 
 class HomePage extends StatelessWidget {
+  static const String route = "/home";
+
   const HomePage({super.key});
 
   @override
@@ -50,10 +47,24 @@ class HomePage extends StatelessWidget {
           fit: BoxFit.cover,
           width: double.infinity,
         ),
-        Carousel(
-          title: "Popular Movies",
-          movies: movies,
-        ),
+        FutureBuilder(
+            future: MovieRepository().getMovies(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CarouselLoader();
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No movies found.'));
+              } else {
+                final movies = snapshot.data ?? [];
+
+                return Carousel(
+                  title: "Popular Movies",
+                  movies: movies,
+                );
+              }
+            }),
       ],
     ));
   }

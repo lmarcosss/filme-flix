@@ -1,9 +1,11 @@
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/components/movie/movie_item.dart';
+import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
+  static const String route = "/favorites";
   const FavoritesPage({super.key});
 
   @override
@@ -20,8 +22,7 @@ class FavoritesPage extends StatelessWidget {
 
               return MovieItem(
                 title: movie.title,
-                imageUrl: movie.imageUrl,
-                releaseYear: movie.releaseYear,
+                imageUrl: movie.posterPath,
               );
             }));
   }
