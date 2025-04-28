@@ -18,3 +18,7 @@ After that it's possible to run the project using:
 ```
 flutter run --dart-define-from-file=env.json
 ```
+
+### Home Page
+
+<img src="https://github.com/user-attachments/assets/3f72df14-513d-4cc7-8633-54af86bcffcd" width="250px" height="500px" />
