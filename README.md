@@ -21,4 +21,7 @@ flutter run --dart-define-from-file=env.json
 
 ### Home Page
 
-<img src="https://github.com/user-attachments/assets/3f72df14-513d-4cc7-8633-54af86bcffcd" width="250px" height="500px" />
+https://github.com/user-attachments/assets/05d8414a-e0bd-4e8b-97d0-fd574c63402d
+
+
+
