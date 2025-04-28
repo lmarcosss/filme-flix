@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/components/inputs/search_input.dart';
 import 'package:filme_flix/components/movie/movie_item.dart';
+import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   late MovieRepository movieRepository;
   late List<Movie> searchedMovies = [];
+  late bool isLoading = false;
 
   Timer? _debounce;
   String result = '';
@@ -54,10 +56,15 @@ class _SearchPageState extends State<SearchPage> {
       });
     }
 
+    setState(() {
+      isLoading = true;
+    });
+
     final newSearchedMovies = await movieRepository.searchMovies(query);
 
     setState(() {
       searchedMovies = newSearchedMovies;
+      isLoading = false;
     });
   }
 
@@ -75,8 +82,12 @@ class _SearchPageState extends State<SearchPage> {
               itemBuilder: (context, index) {
                 final movie = searchedMovies[index];
 
-                if (movie.posterPath.isEmpty) {
-                  return const SizedBox.shrink();
+                if (isLoading) {
+                  return const MovieItemLoader();
+                }
+
+                if (!isLoading && movie.posterPath.isEmpty) {
+                  return SizedBox.shrink();
                 }
 
                 return MovieItem(movie: movie);

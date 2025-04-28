@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/movie_details.dart';
+import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +17,12 @@ class MovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16, top: 16, left: 16, right: 24),
+      padding: const EdgeInsets.only(
+        bottom: 16,
+        top: 16,
+        left: 16,
+        right: 24,
+      ),
       child: InkWell(
           onTap: () {
             context.push(MovieDetailsPage.route, extra: {
@@ -24,8 +32,15 @@ class MovieItem extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(Movie.getImageUrl(movie.posterPath),
-                  width: 60, height: 80, fit: BoxFit.cover),
+              CachedNetworkImage(
+                imageUrl: Movie.getImageUrl(movie.posterPath),
+                width: 60,
+                height: 80,
+                fit: BoxFit.cover,
+                placeholder: (context, url) {
+                  return MovieItemImageLoader();
+                },
+              ),
               const SizedBox(
                 width: 12,
               ),
@@ -44,9 +59,9 @@ class MovieItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            movie.releaseDate != null &&
-                                    movie.releaseDate!.length >= 4
-                                ? movie.releaseDate!.substring(0, 4)
+                            movie.releaseDate!.isNotEmpty
+                                ? DateFormatter.getYearFromStringDate(
+                                    movie.releaseDate!)
                                 : "Unknown",
                             style: TextStyle(
                               fontSize: 14,

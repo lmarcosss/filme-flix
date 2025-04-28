@@ -67,4 +67,10 @@ class MovieRepository {
 
     return movies;
   }
+
+  Future<Movie?> getMovieDetails(String id) async {
+    final response = await client.get("/movie/$id");
+
+    return Movie.fromJson(response.data);
+  }
 }
