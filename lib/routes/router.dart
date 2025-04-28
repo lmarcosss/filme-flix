@@ -3,6 +3,7 @@ import 'package:filme_flix/pages/favorites_page.dart';
 import 'package:filme_flix/pages/home_page.dart';
 import 'package:filme_flix/pages/landing_page.dart';
 import 'package:filme_flix/pages/login_page.dart';
+import 'package:filme_flix/pages/movie_details.dart';
 import 'package:filme_flix/pages/search_page.dart';
 import 'package:filme_flix/pages/settings_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
@@ -22,42 +23,47 @@ final router = GoRouter(initialLocation: LandingPage.route, routes: [
     builder: (context, state) => SignUpPage(),
   ),
   ShellRoute(
-      builder: (context, state, child) {
-        int? index;
-        final int homeIndex = 0;
-        if (state.extra != null) {
-          index = state.extra as int;
-        }
+    builder: (context, state, child) {
+      int? index;
+      final int homeIndex = 0;
+      if (state.extra != null) {
+        index = state.extra as int;
+      }
 
-        return LoggedNavBar(
-          index: index ?? homeIndex,
-          child: child,
-        );
-      },
-      routes: [
-        GoRoute(
-          path: HomePage.route,
-          pageBuilder: (_, __) => NoTransitionPage(
-            child: HomePage(),
-          ),
+      return LoggedNavBar(
+        index: index ?? homeIndex,
+        child: child,
+      );
+    },
+    routes: [
+      GoRoute(
+        path: HomePage.route,
+        pageBuilder: (_, __) => NoTransitionPage(
+          child: HomePage(),
         ),
-        GoRoute(
-          path: SearchPage.route,
-          pageBuilder: (_, __) => NoTransitionPage(
-            child: SearchPage(),
-          ),
+      ),
+      GoRoute(
+        path: SearchPage.route,
+        pageBuilder: (_, __) => NoTransitionPage(
+          child: SearchPage(),
         ),
-        GoRoute(
-          path: FavoritesPage.route,
-          pageBuilder: (_, __) => NoTransitionPage(
-            child: FavoritesPage(),
-          ),
+      ),
+      GoRoute(
+        path: FavoritesPage.route,
+        pageBuilder: (_, __) => NoTransitionPage(
+          child: FavoritesPage(),
         ),
-        GoRoute(
-          path: SettingsPage.route,
-          pageBuilder: (_, __) => NoTransitionPage(
-            child: SettingsPage(),
-          ),
+      ),
+      GoRoute(
+        path: SettingsPage.route,
+        pageBuilder: (_, __) => NoTransitionPage(
+          child: SettingsPage(),
         ),
-      ])
+      ),
+    ],
+  ),
+  GoRoute(
+    path: MovieDetailsPage.route,
+    builder: (context, state) => MovieDetailsPage(),
+  ),
 ]);

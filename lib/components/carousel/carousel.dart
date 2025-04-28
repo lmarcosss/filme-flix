@@ -1,6 +1,8 @@
 import 'package:filme_flix/components/carousel/carousel_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/pages/movie_details.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Carousel extends StatelessWidget {
   final String title;
@@ -35,9 +37,12 @@ class Carousel extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 )),
+            const SizedBox(
+              height: 8,
+            ),
             SizedBox(
                 width: double.infinity,
-                height: 259,
+                height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: movies.length,
@@ -45,12 +50,16 @@ class Carousel extends StatelessWidget {
                     final movie = movies[index];
 
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            height: 200,
+                      padding: const EdgeInsets.only(right: 16),
+                      child: SizedBox(
+                          width: 140,
+                          height: 200,
+                          child: InkWell(
+                            onTap: () {
+                              context.push(MovieDetailsPage.route, extra: {
+                                "movie": movie,
+                              });
+                            },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
@@ -58,9 +67,7 @@ class Carousel extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          )),
                     );
                   },
                 ))
