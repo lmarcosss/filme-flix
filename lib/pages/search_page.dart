@@ -79,11 +79,7 @@ class _SearchPageState extends State<SearchPage> {
                   return const SizedBox.shrink();
                 }
 
-                return MovieItem(
-                  imageUrl: Movie.getImageUrl(movie.posterPath),
-                  title: movie.title,
-                  releaseDate: movie.releaseDate ?? "",
-                );
+                return MovieItem(movie: movie);
               },
             ),
           ),
