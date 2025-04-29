@@ -4,9 +4,8 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "filme_fix",
+            "name": "filme_flix",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
@@ -15,13 +14,13 @@
             ]
         },
         {
-            "name": "filme_fix (profile mode)",
+            "name": "filme_flix (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "filme_fix (release mode)",
+            "name": "filme_flix (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
