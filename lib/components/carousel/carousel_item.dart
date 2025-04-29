@@ -17,9 +17,9 @@ class CarouselItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: CachedNetworkImage(
-        imageUrl: ImageImdb.getImageUrl(
+        imageUrl: ImageTmdb.getImageUrl(
           imageUrl,
-          size: ImageImdb.w154,
+          size: ImageTmdb.w154,
         ),
         fit: BoxFit.cover,
         placeholder: (context, url) {

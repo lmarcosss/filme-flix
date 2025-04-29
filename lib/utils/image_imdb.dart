@@ -1,4 +1,4 @@
-class ImageImdb {
+class ImageTmdb {
   static const String w92 = 'w92';
   static const String w154 = 'w154';
   static const String w185 = 'w185';

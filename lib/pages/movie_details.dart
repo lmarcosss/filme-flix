@@ -25,11 +25,11 @@ class MovieDetailsPage extends StatelessWidget {
               height: 220,
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: ImageImdb.getImageUrl(
+                imageUrl: ImageTmdb.getImageUrl(
                     movie.backdropPath.isNotEmpty
                         ? movie.backdropPath
                         : movie.posterPath,
-                    size: ImageImdb.w500),
+                    size: ImageTmdb.w500),
                 placeholder: (context, url) {
                   return Center(
                     child: Shimmer.fromColors(

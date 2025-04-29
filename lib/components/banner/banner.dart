@@ -30,9 +30,9 @@ class BannerMovie extends StatelessWidget {
       },
       child: CachedNetworkImage(
         imageUrl: movie?.posterPath != null
-            ? ImageImdb.getImageUrl(
+            ? ImageTmdb.getImageUrl(
                 movie!.posterPath,
-                size: ImageImdb.w780,
+                size: ImageTmdb.w780,
               )
             : '',
         fit: BoxFit.cover,

@@ -34,9 +34,9 @@ class MovieItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
-                imageUrl: ImageImdb.getImageUrl(
+                imageUrl: ImageTmdb.getImageUrl(
                   movie.posterPath,
-                  size: ImageImdb.w92,
+                  size: ImageTmdb.w92,
                 ),
                 width: 60,
                 height: 80,

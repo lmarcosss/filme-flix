@@ -61,8 +61,8 @@ class _LandingPageState extends State<LandingPage> {
       Positioned.fill(
         child: CachedNetworkImage(
           imageUrl: bannerMovie?.posterPath != null
-              ? ImageImdb.getImageUrl(bannerMovie!.posterPath,
-                  size: ImageImdb.w780)
+              ? ImageTmdb.getImageUrl(bannerMovie!.posterPath,
+                  size: ImageTmdb.w780)
               : "",
           fit: BoxFit.cover,
           placeholder: (context, url) {
