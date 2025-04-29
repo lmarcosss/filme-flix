@@ -19,6 +19,9 @@ class _HomePageState extends State<HomePage> {
   late bool isPopularMoviesLoading = false;
   late List<Movie> popularMovies = [];
 
+  late bool isTopRatedMoviesLoading = false;
+  late List<Movie> topRatedMovies = [];
+
   Movie? bannerMovie;
   late bool isBannerMovieLoading = false;
 
@@ -27,7 +30,8 @@ class _HomePageState extends State<HomePage> {
     movieRepository = MovieRepository();
 
     getBannerMovie();
-    getMovies();
+    getPopularMovies();
+    getTopRatedMovies();
 
     super.initState();
   }
@@ -49,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> getMovies() async {
+  Future<void> getPopularMovies() async {
     setState(() {
       isPopularMoviesLoading = true;
     });
@@ -75,6 +79,24 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> getTopRatedMovies() async {
+    setState(() {
+      isTopRatedMoviesLoading = true;
+    });
+
+    final moviesApi = await movieRepository.getTopRatedMovies();
+
+    if (moviesApi.isNotEmpty) {
+      setState(() {
+        topRatedMovies = moviesApi;
+      });
+    }
+
+    setState(() {
+      isTopRatedMoviesLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +111,11 @@ class _HomePageState extends State<HomePage> {
           title: "Popular Movies",
           movies: popularMovies,
           isLoading: isPopularMoviesLoading,
+        ),
+        Carousel(
+          title: "Top Rated Movies",
+          movies: topRatedMovies,
+          isLoading: isTopRatedMoviesLoading,
         ),
       ],
     ));

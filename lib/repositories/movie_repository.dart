@@ -73,4 +73,16 @@ class MovieRepository {
 
     return Movie.fromJson(response.data);
   }
+
+  Future<List<Movie>> getTopRatedMovies() async {
+    final response = await client.get("/movie/top_rated", queryParameters: {
+      'page': 1,
+    });
+
+    final movies = (response.data['results'] as List)
+        .map((movie) => Movie.fromJson(movie))
+        .toList();
+
+    return movies;
+  }
 }
