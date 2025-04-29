@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/movie_details.dart';
+import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
@@ -27,7 +28,10 @@ class BannerMovie extends StatelessWidget {
       },
       child: CachedNetworkImage(
         imageUrl: movie?.posterPath != null
-            ? Movie.getImageUrl(movie!.posterPath)
+            ? ImageImdb.getImageUrl(
+                movie!.posterPath,
+                size: ImageImdb.w780,
+              )
             : '',
         fit: BoxFit.cover,
         width: double.infinity,
