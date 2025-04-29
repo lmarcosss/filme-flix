@@ -3,6 +3,7 @@ import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/movie_details.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
+import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,7 +34,10 @@ class MovieItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
-                imageUrl: Movie.getImageUrl(movie.posterPath),
+                imageUrl: ImageImdb.getImageUrl(
+                  movie.posterPath,
+                  size: ImageImdb.w92,
+                ),
                 width: 60,
                 height: 80,
                 fit: BoxFit.cover,

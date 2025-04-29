@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
+import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
@@ -23,9 +24,11 @@ class MovieDetailsPage extends StatelessWidget {
             SizedBox(
               height: 220,
               child: CachedNetworkImage(
-                imageUrl: Movie.getImageUrl(movie.backdropPath.isNotEmpty
-                    ? movie.backdropPath
-                    : movie.posterPath),
+                imageUrl: ImageImdb.getImageUrl(
+                    movie.backdropPath.isNotEmpty
+                        ? movie.backdropPath
+                        : movie.posterPath,
+                    size: ImageImdb.w500),
                 placeholder: (context, url) {
                   return Center(
                     child: Shimmer.fromColors(

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -17,7 +17,10 @@ class CarouselItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: CachedNetworkImage(
-        imageUrl: Movie.getImageUrl(imageUrl),
+        imageUrl: ImageImdb.getImageUrl(
+          imageUrl,
+          size: ImageImdb.w154,
+        ),
         fit: BoxFit.cover,
         placeholder: (context, url) {
           return const CarouselItemLoader();

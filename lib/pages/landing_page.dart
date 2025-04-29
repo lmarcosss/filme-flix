@@ -5,6 +5,7 @@ import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/login_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
@@ -60,7 +61,8 @@ class _LandingPageState extends State<LandingPage> {
       Positioned.fill(
         child: CachedNetworkImage(
           imageUrl: bannerMovie?.posterPath != null
-              ? Movie.getImageUrl(bannerMovie!.posterPath)
+              ? ImageImdb.getImageUrl(bannerMovie!.posterPath,
+                  size: ImageImdb.w780)
               : "",
           fit: BoxFit.cover,
           placeholder: (context, url) {
