@@ -23,5 +23,8 @@ flutter run --dart-define-from-file=env.json
 
 https://github.com/user-attachments/assets/05d8414a-e0bd-4e8b-97d0-fd574c63402d
 
+### Landing Page, Login Page and Sign Up Page
+
+https://github.com/user-attachments/assets/2c279031-af47-42c0-a1ac-d8b9ad2e1578
 
 
