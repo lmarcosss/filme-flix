@@ -24,6 +24,7 @@ class MovieDetailsPage extends StatelessWidget {
             SizedBox(
               height: 220,
               child: CachedNetworkImage(
+                fit: BoxFit.cover,
                 imageUrl: ImageImdb.getImageUrl(
                     movie.backdropPath.isNotEmpty
                         ? movie.backdropPath

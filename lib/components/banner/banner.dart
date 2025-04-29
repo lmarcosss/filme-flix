@@ -18,6 +18,8 @@ class BannerMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () {
         if (movie != null) {
@@ -35,7 +37,7 @@ class BannerMovie extends StatelessWidget {
             : '',
         fit: BoxFit.cover,
         width: double.infinity,
-        height: 500,
+        height: size.height * 0.6,
         placeholder: (context, url) => BannerLoader(),
         errorWidget: (context, url, error) => BannerLoader(),
       ),
