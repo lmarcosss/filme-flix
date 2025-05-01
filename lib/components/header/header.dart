@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final IconButton? rightIcon;
   const Header({
     super.key,
     required this.title,
+    this.rightIcon,
   });
 
   @override
@@ -17,6 +19,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
+      actions: [
+        rightIcon ?? const SizedBox.shrink(),
+      ],
     );
   }
 

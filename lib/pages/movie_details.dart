@@ -1,24 +1,70 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/repositories/favorite_repository.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MovieDetailsPage extends StatelessWidget {
+class MovieDetailsPage extends StatefulWidget {
   static const String route = "/movie-details";
+  final Movie movie;
 
-  const MovieDetailsPage({super.key});
+  const MovieDetailsPage({super.key, required this.movie});
+
+  @override
+  State<MovieDetailsPage> createState() => _MovieDetailsPageState();
+}
+
+class _MovieDetailsPageState extends State<MovieDetailsPage> {
+  late FavoriteMovieRepository favoriteMovieRepository;
+  late bool isFavoriteMovie = false;
+  late Movie movie;
+
+  @override
+  void initState() {
+    super.initState();
+
+    favoriteMovieRepository = FavoriteMovieRepository();
+    movie = widget.movie;
+
+    verifyIfMovieIsFavorite();
+  }
+
+  Future<void> verifyIfMovieIsFavorite() async {
+    final isFavoriteMovieFromDb =
+        await favoriteMovieRepository.isFavoriteMovie(movie);
+
+    setState(() {
+      isFavoriteMovie = isFavoriteMovieFromDb;
+    });
+  }
+
+  Future<void> handleFavoriteMovie() async {
+    if (isFavoriteMovie) {
+      await favoriteMovieRepository.removeFavoriteMovie(movie);
+    } else {
+      await favoriteMovieRepository.addFavoriteMovie(movie);
+    }
+
+    setState(() {
+      isFavoriteMovie = !isFavoriteMovie;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final extra = GoRouterState.of(context).extra as Map<String, dynamic>;
-    final movie = extra["movie"] as Movie;
-
     return Scaffold(
-        appBar: Header(title: movie.title),
+        appBar: Header(
+          title: movie.title,
+          rightIcon: IconButton(
+            onPressed: handleFavoriteMovie,
+            icon: Icon(
+              isFavoriteMovie ? Icons.favorite : Icons.favorite_outline,
+            ),
+          ),
+        ),
         body: ListView(
           children: [
             SizedBox(
