@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.only(top: 0, bottom: 32),
       children: [
         BannerMovie(
           movie: bannerMovie,
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           isLoading: isPopularMoviesLoading,
         ),
         Carousel(
-          title: "Top Rated Movies",
+          title: "Top Rated",
           movies: topRatedMovies,
           isLoading: isTopRatedMoviesLoading,
         ),
