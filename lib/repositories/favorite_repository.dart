@@ -2,35 +2,29 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/repositories/app_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteMovieRepository {
-  SharedPreferences? _preferences;
+  final SharedPreferences storage = AppSharedPreferencesRepository.instance;
   final String key = 'favoriteMovies';
 
-  FutureOr<SharedPreferences> get db async {
-    _preferences ??= await SharedPreferences.getInstance();
-
-    return _preferences!;
-  }
-
   Future<List<Movie>> getFavoriteMovies() async {
-    final storage = await db;
-
     final movies = storage.getStringList(key);
 
     if (movies == null || movies.isEmpty) {
       return [];
     }
 
-    return movies.map((movie) => Movie.fromJson(jsonDecode(movie))).toList();
+    final formattedMovies =
+        movies.map((movie) => Movie.fromJson(jsonDecode(movie))).toList();
+
+    return formattedMovies;
   }
 
   Future<void> addFavoriteMovie(Movie movie) async {
     final movies = await getFavoriteMovies();
     movies.add(movie);
-
-    final storage = await db;
 
     storage.setStringList(
       key,
@@ -41,8 +35,6 @@ class FavoriteMovieRepository {
   Future<void> removeFavoriteMovie(Movie movie) async {
     final movies = await getFavoriteMovies();
     movies.removeWhere((item) => item.id == movie.id);
-
-    final storage = await db;
 
     storage.setStringList(
       key,
