@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/repositories/app_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MovieRepository {
@@ -11,18 +12,12 @@ class MovieRepository {
     BaseOptions(baseUrl: AppConfig.instance.baseUrl, headers: {
       'Authorization': 'Bearer ${AppConfig.instance.apiToken}',
     }, queryParameters: {
-      'language': 'pt-BR',
+      'language': 'en-US',
     }),
   );
 
-  SharedPreferences? _preferences;
+  final SharedPreferences storage = AppSharedPreferencesRepository.instance;
   final String popularMoviesKey = 'popular_movies';
-
-  FutureOr<SharedPreferences> get db async {
-    _preferences ??= await SharedPreferences.getInstance();
-
-    return _preferences!;
-  }
 
   Future<List<Movie>> getPopularMovies() async {
     final response = await client.get("/discover/movie", queryParameters: {
@@ -33,8 +28,6 @@ class MovieRepository {
         .map((movie) => Movie.fromJson(movie))
         .toList();
 
-    final storage = await db;
-
     storage.setStringList(
       popularMoviesKey,
       movies.map((movie) => jsonEncode(movie.toJson())).toList(),
@@ -44,8 +37,6 @@ class MovieRepository {
   }
 
   Future<List<Movie>> getPopularMoviesFromDb() async {
-    final storage = await db;
-
     final movies = storage.getStringList(popularMoviesKey);
 
     if (movies == null || movies.isEmpty) {
