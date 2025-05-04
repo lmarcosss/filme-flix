@@ -20,19 +20,17 @@ flutter run --dart-define-from-file=env.json
 ```
 
 ### Landing Page, Login Page and Sign Up Page
-
 https://github.com/user-attachments/assets/2c279031-af47-42c0-a1ac-d8b9ad2e1578
 
 ### Home Page
-
 https://github.com/user-attachments/assets/05d8414a-e0bd-4e8b-97d0-fd574c63402d
 
 ### Movie Details Page
-
 https://github.com/user-attachments/assets/b3f4d580-65d8-47a1-b7f1-eaea1df0a9a8
 
-### Search Page
 
+### Search Page
 https://github.com/user-attachments/assets/34504132-135c-4a21-9891-902bc6b1b9c5
 
-
+### Favorites Page
+https://github.com/user-attachments/assets/808dfa6d-1cc3-433f-b31e-bb8d54b6028e
