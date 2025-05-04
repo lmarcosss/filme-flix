@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
+import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/repositories/favorite_repository.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieDetailsPage extends StatefulWidget {
@@ -19,6 +22,7 @@ class MovieDetailsPage extends StatefulWidget {
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
   late FavoriteMovieRepository favoriteMovieRepository;
+  late FavoritesBloc favoritesBloc;
   late bool isFavoriteMovie = false;
   late Movie movie;
 
@@ -26,6 +30,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   void initState() {
     super.initState();
 
+    favoritesBloc = context.read<FavoritesBloc>();
     favoriteMovieRepository = FavoriteMovieRepository();
     movie = widget.movie;
 
@@ -47,6 +52,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     } else {
       await favoriteMovieRepository.addFavoriteMovie(movie);
     }
+
+    favoritesBloc.add(GetSetStateFavoriteMovies());
 
     setState(() {
       isFavoriteMovie = !isFavoriteMovie;
