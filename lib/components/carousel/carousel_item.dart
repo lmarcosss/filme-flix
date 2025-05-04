@@ -5,11 +5,9 @@ import 'package:shimmer/shimmer.dart';
 
 class CarouselItem extends StatelessWidget {
   final String imageUrl;
-  final bool isLoading;
   const CarouselItem({
     super.key,
     required this.imageUrl,
-    required this.isLoading,
   });
 
   @override

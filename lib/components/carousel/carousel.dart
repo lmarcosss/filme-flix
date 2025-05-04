@@ -7,37 +7,27 @@ import 'package:go_router/go_router.dart';
 class Carousel extends StatelessWidget {
   final String title;
   final List<Movie> movies;
-  final bool isLoading;
 
   const Carousel({
     super.key,
     required this.title,
     required this.movies,
-    required this.isLoading,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 8,
-        top: 16,
-      ),
+      padding: const EdgeInsets.only(left: 16, right: 8, top: 16),
       child: Column(
         children: [
           SizedBox(
               width: double.infinity,
               child: Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               )),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           SizedBox(
             width: double.infinity,
             height: 200,
@@ -63,7 +53,6 @@ class Carousel extends StatelessWidget {
                       },
                       child: CarouselItem(
                         imageUrl: movie.posterPath,
-                        isLoading: isLoading,
                       ),
                     ),
                   ),
@@ -71,6 +60,48 @@ class Carousel extends StatelessWidget {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class CarouselLoader extends StatelessWidget {
+  final String title;
+
+  const CarouselLoader({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 8, top: 16),
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            ),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            height: 200,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: CarouselItemLoader(),
+                );
+              },
+            ),
+          )
         ],
       ),
     );

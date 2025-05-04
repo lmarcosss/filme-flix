@@ -1,7 +1,7 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
-import 'package:filme_flix/pages/home_page.dart';
+import 'package:filme_flix/pages/home/home_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,10 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.only(bottom: 24),
             child: Text(
               "Login",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             )),
         CommmonInput(
           text: "Email",
@@ -54,10 +51,8 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Text("Haven't made an account? "),
             InkWell(
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(color: Colors.blueAccent),
-                ),
+                child:
+                    Text("Sign Up", style: TextStyle(color: Colors.blueAccent)),
                 onTap: () {
                   context.replace(SignUpPage.route);
                 })
