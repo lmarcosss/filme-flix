@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/repositories/app_preferences_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MovieRepository {
   final Dio client = Dio(
@@ -14,8 +12,6 @@ class MovieRepository {
       'language': 'en-US',
     }),
   );
-
-  final SharedPreferences storage = AppSharedPreferencesRepository.instance;
 
   Future<List<Movie>> getPopularMovies() async {
     final response = await client.get("/discover/movie", queryParameters: {
