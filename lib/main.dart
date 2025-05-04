@@ -1,3 +1,4 @@
+import 'package:filme_flix/providers.dart';
 import 'package:filme_flix/repositories/app_preferences_repository.dart';
 import 'package:filme_flix/routes/router.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppSharedPreferencesRepository.init();
 
-  runApp(const MyApp());
+  runApp(
+    providers(
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
