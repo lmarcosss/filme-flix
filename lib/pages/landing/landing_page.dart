@@ -2,11 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/buttons/secondary_button.dart';
 import 'package:filme_flix/models/movie_model.dart';
+import 'package:filme_flix/pages/landing/landing_bloc.dart';
+import 'package:filme_flix/pages/landing/landing_event.dart';
+import 'package:filme_flix/pages/landing/landing_state.dart';
 import 'package:filme_flix/pages/login_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -24,32 +27,15 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   Movie? bannerMovie;
   late bool isBannerMovieLoading;
-  late MovieRepository movieRepository;
+  late LandingBloc landingBloc;
+  final String starWarsId = "181808";
 
   @override
   void initState() {
-    movieRepository = MovieRepository();
-
-    getBannerMovie();
+    landingBloc = LandingBloc();
+    landingBloc.add(GetSetStateLanding(movieId: starWarsId));
 
     super.initState();
-  }
-
-  Future<void> getBannerMovie() async {
-    const String starWarsId = "181808";
-
-    setState(() {
-      isBannerMovieLoading = true;
-    });
-
-    final moviesApi = await movieRepository.getMovieDetails(starWarsId);
-
-    if (moviesApi != null) {
-      setState(() {
-        bannerMovie = moviesApi;
-        isBannerMovieLoading = false;
-      });
-    }
   }
 
   @override
@@ -58,38 +44,56 @@ class _LandingPageState extends State<LandingPage> {
 
     return Material(
         child: Stack(alignment: Alignment.bottomCenter, children: [
-      Positioned.fill(
-        child: CachedNetworkImage(
-          imageUrl: bannerMovie?.posterPath != null
-              ? ImageTmdb.getImageUrl(bannerMovie!.posterPath,
-                  size: ImageTmdb.w780)
-              : "",
-          fit: BoxFit.cover,
-          placeholder: (context, url) {
-            return Shimmer.fromColors(
-              baseColor: Colors.grey.shade900,
-              highlightColor: Colors.grey.shade800,
-              child: Container(
-                height: 500,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
+      BlocBuilder(
+        bloc: landingBloc,
+        builder: (context, state) {
+          return switch (state) {
+            LandingStateSuccess() => Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: state.bannerMovie.posterPath.isNotEmpty
+                      ? ImageTmdb.getImageUrl(state.bannerMovie.posterPath,
+                          size: ImageTmdb.w780)
+                      : "",
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade900,
+                      highlightColor: Colors.grey.shade800,
+                      child: Container(
+                        height: 500,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade900,
+                      highlightColor: Colors.grey.shade800,
+                      child: Container(
+                        height: 500,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Shimmer.fromColors(
-              baseColor: Colors.grey.shade900,
-              highlightColor: Colors.grey.shade800,
-              child: Container(
-                height: 500,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                ),
+            LandingStateLoading() => Container(
+                height: size.height * 0.36,
+                width: size.width,
+                color: Colors.black,
               ),
-            );
-          },
-        ),
+            LandingStateError() => Container(
+                height: size.height * 0.36,
+                width: size.width,
+                color: Colors.red,
+              ),
+            _ => SizedBox.shrink(),
+          };
+        },
       ),
       Container(
         height: size.height * 0.36,
