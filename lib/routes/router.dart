@@ -5,7 +5,7 @@ import 'package:filme_flix/pages/home/home_page.dart';
 import 'package:filme_flix/pages/landing/landing_page.dart';
 import 'package:filme_flix/pages/login_page.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
-import 'package:filme_flix/pages/search_page.dart';
+import 'package:filme_flix/pages/search/search_page.dart';
 import 'package:filme_flix/pages/settings_page.dart';
 import 'package:filme_flix/pages/sign_up_page.dart';
 import 'package:go_router/go_router.dart';
