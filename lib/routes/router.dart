@@ -2,7 +2,7 @@ import 'package:filme_flix/components/nav_bar/logged_nav_bar.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_page.dart';
 import 'package:filme_flix/pages/home/home_page.dart';
-import 'package:filme_flix/pages/landing_page.dart';
+import 'package:filme_flix/pages/landing/landing_page.dart';
 import 'package:filme_flix/pages/login_page.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/pages/search_page.dart';
