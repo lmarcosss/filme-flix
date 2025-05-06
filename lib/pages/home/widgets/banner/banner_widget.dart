@@ -3,7 +3,7 @@ import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/home/widgets/banner/banner_bloc.dart';
 import 'package:filme_flix/pages/home/widgets/banner/banner_event.dart';
 import 'package:filme_flix/pages/home/widgets/banner/banner_state.dart';
-import 'package:filme_flix/pages/movie_details.dart';
+import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

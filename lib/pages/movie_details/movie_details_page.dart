@@ -2,8 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
-import 'package:filme_flix/pages/favorites/favorites_event.dart';
-import 'package:filme_flix/repositories/favorite_repository.dart';
+import 'package:filme_flix/pages/movie_details/movie_details_bloc.dart';
+import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
+import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:flutter/material.dart';
@@ -21,57 +22,42 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
-  late FavoriteMovieRepository favoriteMovieRepository;
   late FavoritesBloc favoritesBloc;
-  late bool isFavoriteMovie = false;
-  late Movie movie;
+  late MovieDetailsBloc movieDetailsBloc;
+  late Movie movie = widget.movie;
 
   @override
   void initState() {
     super.initState();
 
     favoritesBloc = context.read<FavoritesBloc>();
-    favoriteMovieRepository = FavoriteMovieRepository();
-    movie = widget.movie;
-
-    verifyIfMovieIsFavorite();
-  }
-
-  Future<void> verifyIfMovieIsFavorite() async {
-    final isFavoriteMovieFromDb =
-        await favoriteMovieRepository.isFavoriteMovie(movie);
-
-    setState(() {
-      isFavoriteMovie = isFavoriteMovieFromDb;
-    });
-  }
-
-  Future<void> handleFavoriteMovie() async {
-    if (isFavoriteMovie) {
-      await favoriteMovieRepository.removeFavoriteMovie(movie);
-    } else {
-      await favoriteMovieRepository.addFavoriteMovie(movie);
-    }
-
-    favoritesBloc.add(GetSetStateFavoriteMovies());
-
-    setState(() {
-      isFavoriteMovie = !isFavoriteMovie;
-    });
+    movieDetailsBloc = MovieDetailsBloc(favoritesBloc: favoritesBloc);
+    movieDetailsBloc.add(GetSetStateMovieDetails(movie: movie));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Header(
-          title: movie.title,
-          rightIcon: IconButton(
-            onPressed: handleFavoriteMovie,
-            icon: Icon(
-              isFavoriteMovie ? Icons.favorite : Icons.favorite_outline,
-            ),
-          ),
-        ),
+            title: movie.title,
+            rightIcon: IconButton(
+              onPressed: () {
+                movieDetailsBloc.add(ToggleFavoriteMovie(movie: movie));
+              },
+              icon: BlocBuilder(
+                bloc: movieDetailsBloc,
+                builder: (context, state) {
+                  return switch (state) {
+                    MovieDetailsStateSuccess() => Icon(
+                        state.isFavoriteMovie
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                      ),
+                    _ => const SizedBox.shrink(),
+                  };
+                },
+              ),
+            )),
         body: ListView(
           children: [
             SizedBox(
