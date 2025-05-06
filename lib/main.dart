@@ -1,12 +1,12 @@
 import 'package:filme_flix/providers.dart';
-import 'package:filme_flix/repositories/app_preferences_repository.dart';
+import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:filme_flix/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppSharedPreferencesRepository.init();
+  await SharedPreferencesRepository.init();
 
   runApp(
     providers(
