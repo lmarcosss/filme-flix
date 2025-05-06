@@ -1,18 +1,28 @@
 import 'package:filme_flix/components/buttons/primary_button.dart';
 import 'package:filme_flix/components/inputs/common_input.dart';
 import 'package:filme_flix/components/inputs/password_input.dart';
-import 'package:filme_flix/pages/login_page.dart';
+import 'package:filme_flix/pages/home/home_page.dart';
+import 'package:filme_flix/pages/sign-up/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpPage extends StatelessWidget {
-  static const String route = "/sign-up";
+class LoginPage extends StatefulWidget {
+  static const String route = "/login";
 
-  const SignUpPage({super.key});
+  const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+
+    void onLogin() {
+      context.go(HomePage.route);
+    }
 
     return Material(
         child: Column(
@@ -22,11 +32,8 @@ class SignUpPage extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(bottom: 24),
             child: Text(
-              "Sign Up",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              "Login",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             )),
         CommmonInput(
           text: "Email",
@@ -34,27 +41,20 @@ class SignUpPage extends StatelessWidget {
           icon: Icon(Icons.email, color: colorScheme.primary),
         ),
         SizedBox(height: 8),
-        CommmonInput(
-          text: "Username",
-          icon: Icon(Icons.person, color: colorScheme.primary),
-        ),
-        SizedBox(height: 8),
         PasswordInput(text: "Password"),
         PrimaryButton(
-            onPressed: () {},
-            text: "Create Account",
+            onPressed: onLogin,
+            text: "Login",
             padding: EdgeInsets.only(left: 16, right: 16, top: 16)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Already have an account? "),
+            Text("Haven't made an account? "),
             InkWell(
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.blueAccent),
-                ),
+                child:
+                    Text("Sign Up", style: TextStyle(color: Colors.blueAccent)),
                 onTap: () {
-                  context.replace(LoginPage.route);
+                  context.replace(SignUpPage.route);
                 })
           ],
         )

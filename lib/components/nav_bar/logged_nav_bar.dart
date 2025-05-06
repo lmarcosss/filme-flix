@@ -1,7 +1,7 @@
 import 'package:filme_flix/pages/favorites/favorites_page.dart';
 import 'package:filme_flix/pages/home/home_page.dart';
 import 'package:filme_flix/pages/search/search_page.dart';
-import 'package:filme_flix/pages/settings_page.dart';
+import 'package:filme_flix/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
