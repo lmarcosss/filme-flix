@@ -1,6 +1,6 @@
 import 'package:filme_flix/components/carousel/carousel_item.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/pages/movie_details.dart';
+import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
