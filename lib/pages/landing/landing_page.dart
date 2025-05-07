@@ -1,6 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/components/buttons/primary_button.dart';
-import 'package:filme_flix/components/buttons/secondary_button.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/landing/landing_bloc.dart';
 import 'package:filme_flix/pages/landing/landing_event.dart';
@@ -8,6 +6,8 @@ import 'package:filme_flix/pages/landing/landing_state.dart';
 import 'package:filme_flix/pages/login/login_page.dart';
 import 'package:filme_flix/pages/sign-up/sign_up_page.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
+import 'package:filme_flix/widgets/buttons/primary_button_widget.dart';
+import 'package:filme_flix/widgets/buttons/secondary_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

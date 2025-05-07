@@ -13,18 +13,6 @@ class MovieRepository {
     }),
   );
 
-  Future<List<Movie>> getPopularMovies() async {
-    final response = await client.get("/discover/movie", queryParameters: {
-      'page': 1,
-    });
-
-    final movies = (response.data['results'] as List)
-        .map((movie) => Movie.fromJson(movie))
-        .toList();
-
-    return movies;
-  }
-
   Future<List<Movie>> searchMovies(String searchText) async {
     final response = await client.get("/search/movie", queryParameters: {
       'page': 1,
@@ -44,8 +32,44 @@ class MovieRepository {
     return Movie.fromJson(response.data);
   }
 
+  Future<List<Movie>> getNowPlayingMovies() async {
+    final response = await client.get("/movie/now_playing", queryParameters: {
+      'page': 1,
+    });
+
+    final movies = (response.data['results'] as List)
+        .map((movie) => Movie.fromJson(movie))
+        .toList();
+
+    return movies;
+  }
+
+  Future<List<Movie>> getPopularMovies() async {
+    final response = await client.get("/movie/popular", queryParameters: {
+      'page': 1,
+    });
+
+    final movies = (response.data['results'] as List)
+        .map((movie) => Movie.fromJson(movie))
+        .toList();
+
+    return movies;
+  }
+
   Future<List<Movie>> getTopRatedMovies() async {
     final response = await client.get("/movie/top_rated", queryParameters: {
+      'page': 1,
+    });
+
+    final movies = (response.data['results'] as List)
+        .map((movie) => Movie.fromJson(movie))
+        .toList();
+
+    return movies;
+  }
+
+  Future<List<Movie>> getUpcomingMovies() async {
+    final response = await client.get("/movie/upcoming", queryParameters: {
       'page': 1,
     });
 

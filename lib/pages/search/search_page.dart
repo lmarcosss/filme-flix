@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:filme_flix/components/header/header.dart';
-import 'package:filme_flix/components/inputs/search_input.dart';
-import 'package:filme_flix/components/movie/movie_item.dart';
-import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/pages/search/search_bloc.dart';
 import 'package:filme_flix/pages/search/search_event.dart';
 import 'package:filme_flix/pages/search/search_state.dart';
+import 'package:filme_flix/widgets/header/header_widget.dart';
+import 'package:filme_flix/widgets/inputs/search_input_widget.dart';
+import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
+import 'package:filme_flix/widgets/movie_item/movie_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

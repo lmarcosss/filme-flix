@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/components/header/header.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_bloc.dart';
@@ -7,6 +6,7 @@ import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
+import 'package:filme_flix/widgets/header/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';

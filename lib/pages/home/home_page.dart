@@ -1,6 +1,6 @@
-import 'package:filme_flix/pages/home/widgets/banner/banner_widget.dart';
-import 'package:filme_flix/pages/home/widgets/popular_carousel/popular_carousel_widget.dart';
-import 'package:filme_flix/pages/home/widgets/top_rated_carousel/top_rated_carousel_widget.dart';
+import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
+import 'package:filme_flix/widgets/banner_movie/banner_movie_widget.dart';
+import 'package:filme_flix/widgets/movie_carousel/movie_carousel_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,8 +15,10 @@ class HomePage extends StatelessWidget {
       padding: EdgeInsets.only(top: 0, bottom: 32),
       children: [
         BannerMovie(),
-        PopularCarousel(),
-        TopRatedCarousel(),
+        MovieCarousel(movieType: MovieCarouselTypeEnum.nowPlaying),
+        MovieCarousel(movieType: MovieCarouselTypeEnum.popular),
+        MovieCarousel(movieType: MovieCarouselTypeEnum.topRated),
+        MovieCarousel(movieType: MovieCarouselTypeEnum.upcoming),
       ],
     ));
   }

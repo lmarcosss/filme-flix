@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
+import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

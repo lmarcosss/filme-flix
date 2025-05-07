@@ -1,10 +1,10 @@
-import 'package:filme_flix/components/header/header.dart';
-import 'package:filme_flix/components/movie/movie_item.dart';
-import 'package:filme_flix/components/movie/movie_item_loader.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/pages/favorites/favorites_state.dart';
 import 'package:filme_flix/repositories/favorite_repository.dart';
+import 'package:filme_flix/widgets/header/header_widget.dart';
+import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
+import 'package:filme_flix/widgets/movie_item/movie_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

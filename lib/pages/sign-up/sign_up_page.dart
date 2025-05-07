@@ -1,7 +1,7 @@
-import 'package:filme_flix/components/buttons/primary_button.dart';
-import 'package:filme_flix/components/inputs/common_input.dart';
-import 'package:filme_flix/components/inputs/password_input.dart';
 import 'package:filme_flix/pages/login/login_page.dart';
+import 'package:filme_flix/widgets/buttons/primary_button_widget.dart';
+import 'package:filme_flix/widgets/inputs/common_input_widget.dart';
+import 'package:filme_flix/widgets/inputs/password_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

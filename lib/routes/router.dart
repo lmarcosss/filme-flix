@@ -1,4 +1,3 @@
-import 'package:filme_flix/components/nav_bar/logged_nav_bar.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_page.dart';
 import 'package:filme_flix/pages/home/home_page.dart';
@@ -8,6 +7,7 @@ import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/pages/search/search_page.dart';
 import 'package:filme_flix/pages/settings/settings_page.dart';
 import 'package:filme_flix/pages/sign-up/sign_up_page.dart';
+import 'package:filme_flix/widgets/nav_bar/logged_nav_bar_widget.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
