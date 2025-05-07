@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/pages/home/widgets/banner/banner_bloc.dart';
-import 'package:filme_flix/pages/home/widgets/banner/banner_event.dart';
-import 'package:filme_flix/pages/home/widgets/banner/banner_state.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
+import 'package:filme_flix/widgets/banner_movie/banner_movie_bloc.dart';
+import 'package:filme_flix/widgets/banner_movie/banner_movie_event.dart';
+import 'package:filme_flix/widgets/banner_movie/banner_movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

@@ -1,4 +1,4 @@
-import 'package:filme_flix/components/header/header.dart';
+import 'package:filme_flix/widgets/header/header_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
