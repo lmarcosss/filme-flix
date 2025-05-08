@@ -1,4 +1,4 @@
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/repositories/home_repository.dart';
 import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_event.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_state.dart';
@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
-  MovieRepository movieRepository = MovieRepository();
+  HomeRepository homeRepository = HomeRepository();
   final SharedPreferences storage = SharedPreferencesRepository.instance;
 
   BannerBloc() : super(BannerStateInitial()) {
@@ -19,11 +19,10 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   ) async {
     emit(BannerStateLoading());
 
-    final bannerMovie = await movieRepository.getMovieDetails(event.movieId);
+    final bannerMovie = await homeRepository.getBannerMovie(event.movieId);
 
     if (bannerMovie == null) {
-      emit(BannerStateError(message: 'Failed to load movie details'));
-      return;
+      return emit(BannerStateError(message: 'Failed to load movie details'));
     }
 
     emit(BannerStateSuccess(movie: bannerMovie));

@@ -1,12 +1,12 @@
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/repositories/home_repository.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_event.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
-  MovieRepository movieRepository = MovieRepository();
+  HomeRepository homeRepository = HomeRepository();
   final MovieCarouselTypeEnum movieType;
   MovieCarouselBloc({
     required this.movieType,
@@ -17,13 +17,13 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
   Future<List<Movie>> _fetchMovies() async {
     switch (movieType) {
       case MovieCarouselTypeEnum.nowPlaying:
-        return await movieRepository.getNowPlayingMovies();
+        return await homeRepository.getNowPlayingMovies();
       case MovieCarouselTypeEnum.popular:
-        return await movieRepository.getPopularMovies();
+        return await homeRepository.getPopularMovies();
       case MovieCarouselTypeEnum.topRated:
-        return await movieRepository.getTopRatedMovies();
+        return await homeRepository.getTopRatedMovies();
       case MovieCarouselTypeEnum.upcoming:
-        return await movieRepository.getUpcomingMovies();
+        return await homeRepository.getUpcomingMovies();
     }
   }
 
