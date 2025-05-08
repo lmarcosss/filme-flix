@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
+import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_bloc.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
@@ -25,14 +28,36 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   late FavoritesBloc favoritesBloc;
   late MovieDetailsBloc movieDetailsBloc;
   late Movie movie = widget.movie;
+  late StreamSubscription<MovieDetailsState> streamSubscription;
 
   @override
   void initState() {
     super.initState();
 
     favoritesBloc = context.read<FavoritesBloc>();
-    movieDetailsBloc = MovieDetailsBloc(favoritesBloc: favoritesBloc);
+    movieDetailsBloc = MovieDetailsBloc();
+    streamSubscription = movieDetailsBloc.stream.listen(handleState);
+
     movieDetailsBloc.add(GetSetStateMovieDetails(movie: movie));
+  }
+
+  @override
+  void dispose() {
+    streamSubscription.cancel();
+    movieDetailsBloc.close();
+    super.dispose();
+  }
+
+  void handleState(MovieDetailsState state) {
+    if (state case MovieDetailsStateSuccess(:final shouldReloadFavorite)) {
+      if (shouldReloadFavorite) {
+        favoritesBloc.add(GetSetStateFavoriteMovies());
+      }
+    }
+  }
+
+  void onToggleFavorite() {
+    movieDetailsBloc.add(ToggleFavoriteMovie(movie: movie));
   }
 
   @override
@@ -41,9 +66,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         appBar: Header(
             title: movie.title,
             rightIcon: IconButton(
-              onPressed: () {
-                movieDetailsBloc.add(ToggleFavoriteMovie(movie: movie));
-              },
+              onPressed: onToggleFavorite,
               icon: BlocBuilder(
                 bloc: movieDetailsBloc,
                 builder: (context, state) {
