@@ -1,5 +1,3 @@
-import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
-import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
 import 'package:filme_flix/repositories/favorite_repository.dart';
@@ -7,11 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   FavoriteMovieRepository favoriteMovieRepository = FavoriteMovieRepository();
-  final FavoritesBloc favoritesBloc;
 
-  MovieDetailsBloc({
-    required this.favoritesBloc,
-  }) : super(MovieDetailsStateInitial()) {
+  MovieDetailsBloc() : super(MovieDetailsStateInitial()) {
     on<GetSetStateMovieDetails>(_loadSetStateMovieIsFavorite);
     on<ToggleFavoriteMovie>(_handleFavoriteMovie);
   }
@@ -43,9 +38,8 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
 
       emit(MovieDetailsStateSuccess(
         isFavoriteMovie: !successState.isFavoriteMovie,
+        shouldReloadFavorite: true,
       ));
-
-      favoritesBloc.add(GetSetStateFavoriteMovies());
     }
   }
 }
