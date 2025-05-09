@@ -16,9 +16,9 @@ class MovieRepository {
     }),
   );
 
-  Future<List<Movie>> searchMovies(String searchText) async {
+  Future<List<Movie>> searchMovies(String searchText, int page) async {
     final response = await client.get("/search/movie", queryParameters: {
-      'page': 1,
+      'page': page,
       'query': searchText,
     });
 

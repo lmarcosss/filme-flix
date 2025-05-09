@@ -14,14 +14,39 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     GetSetStateSearch event,
     Emitter<SearchState> emit,
   ) async {
-    if (event.query.isNotEmpty) {
-      emit(SearchStateLoading());
-
-      final moviesSearched = await movieRepository.searchMovies(event.query);
-
-      emit(SearchStateSuccess(searchResult: moviesSearched));
-    } else {
-      emit(SearchStateInitial());
+    if (event.query.isEmpty) {
+      return emit(SearchStateInitial());
     }
+
+    final currentState = state;
+
+    if (event.isLoadMore && currentState is SearchStateSuccess) {
+      if (currentState.listIsFinished) {
+        return;
+      }
+
+      final newResults = await movieRepository.searchMovies(
+        event.query,
+        currentState.currentPage + 1,
+      );
+
+      if (newResults.isEmpty) {
+        return emit(currentState.copyWith(listIsFinished: true));
+      }
+
+      return emit(currentState.copyWith(
+        searchResult: [...currentState.searchResult, ...newResults],
+        currentPage: currentState.currentPage + 1,
+      ));
+    }
+
+    emit(SearchStateLoading());
+
+    final results = await movieRepository.searchMovies(event.query, 1);
+
+    emit(SearchStateSuccess(
+      searchResult: results,
+      currentPage: 1,
+    ));
   }
 }
