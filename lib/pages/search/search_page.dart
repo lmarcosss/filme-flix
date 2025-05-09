@@ -90,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
                       itemBuilder: (context, index) {
                         final movie = state.searchResult[index];
 
-                        if (movie.posterPath.isEmpty) {
+                        if (movie.posterPath.isEmpty || movie.title.isEmpty) {
                           return SizedBox.shrink();
                         }
 
