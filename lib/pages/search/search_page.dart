@@ -21,13 +21,15 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   late SearchBloc searchBloc;
   Timer? _debounce;
 
   @override
   void initState() {
-    _searchController.addListener(_onSearchChanged);
     searchBloc = SearchBloc();
+    _searchController.addListener(_onSearchChanged);
+    _scrollController.addListener(_onScroll);
 
     super.initState();
   }
@@ -36,12 +38,29 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
+    _scrollController.dispose();
     _debounce?.cancel();
+
     super.dispose();
   }
 
+  void _onScroll() {
+    final screenEndReached = _scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 300;
+
+    if (screenEndReached) {
+      searchBloc.add(GetSetStateSearch(
+        query: _searchController.text,
+        isLoadMore: true,
+      ));
+    }
+  }
+
   void _onSearchChanged() {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    if (_debounce?.isActive ?? false) {
+      _debounce?.cancel();
+    }
+
     _debounce = Timer(const Duration(milliseconds: 500), () {
       searchBloc.add(GetSetStateSearch(query: _searchController.text));
     });
@@ -66,6 +85,7 @@ class _SearchPageState extends State<SearchPage> {
               builder: (context, state) {
                 return switch (state) {
                   SearchStateSuccess() => ListView.builder(
+                      controller: _scrollController,
                       itemCount: state.searchResult.length,
                       itemBuilder: (context, index) {
                         final movie = state.searchResult[index];
