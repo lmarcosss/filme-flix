@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:filme_flix/pages/search/search_bloc.dart';
 import 'package:filme_flix/pages/search/search_event.dart';
 import 'package:filme_flix/pages/search/search_state.dart';
+import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/header/header_widget.dart';
 import 'package:filme_flix/widgets/inputs/search_input_widget.dart';
 import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
@@ -20,14 +21,19 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final TextEditingController _searchController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
-  late SearchBloc searchBloc;
+  late MovieRepository _movieRepository;
+  late TextEditingController _searchController;
+  late ScrollController _scrollController;
+  late SearchBloc _searchBloc;
   Timer? _debounce;
 
   @override
   void initState() {
-    searchBloc = SearchBloc();
+    _movieRepository = MovieRepository();
+    _searchController = TextEditingController();
+    _scrollController = ScrollController();
+
+    _searchBloc = SearchBloc(movieRepository: _movieRepository);
     _searchController.addListener(_onSearchChanged);
     _scrollController.addListener(_onScroll);
 
@@ -49,7 +55,7 @@ class _SearchPageState extends State<SearchPage> {
         _scrollController.position.maxScrollExtent - 300;
 
     if (screenEndReached) {
-      searchBloc.add(GetSetStateSearch(
+      _searchBloc.add(GetSetStateSearch(
         query: _searchController.text,
         isLoadMore: true,
       ));
@@ -62,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      searchBloc.add(GetSetStateSearch(query: _searchController.text));
+      _searchBloc.add(GetSetStateSearch(query: _searchController.text));
     });
   }
 
@@ -73,7 +79,7 @@ class _SearchPageState extends State<SearchPage> {
       body: Column(
         children: [
           BlocBuilder(
-            bloc: searchBloc,
+            bloc: _searchBloc,
             builder: (context, state) {
               return SearchInput(controller: _searchController);
             },
@@ -81,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(height: 16),
           Expanded(
             child: BlocBuilder(
-              bloc: searchBloc,
+              bloc: _searchBloc,
               builder: (context, state) {
                 return switch (state) {
                   SearchStateSuccess() => ListView.builder(

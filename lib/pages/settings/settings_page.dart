@@ -1,4 +1,5 @@
 import 'package:filme_flix/widgets/header/header_widget.dart';
+import 'package:filme_flix/widgets/working_progress/working_progress_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -9,9 +10,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Header(title: "Settings"),
-        body: ListView(
-          children: [],
-        ));
+      appBar: Header(title: "Settings"),
+      body: WorkingProgress(),
+    );
   }
 }

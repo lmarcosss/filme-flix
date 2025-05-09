@@ -4,9 +4,9 @@ import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  MovieRepository movieRepository = MovieRepository();
+  MovieRepository movieRepository;
 
-  SearchBloc() : super(SearchStateInitial()) {
+  SearchBloc({required this.movieRepository}) : super(SearchStateInitial()) {
     on<GetSetStateSearch>(_loadSetStateSearch);
   }
 
