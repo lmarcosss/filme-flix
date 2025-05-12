@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/pages/search/search_bloc.dart';
 import 'package:filme_flix/pages/search/search_event.dart';
 import 'package:filme_flix/pages/search/search_state.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/repositories/search_repository.dart';
 import 'package:filme_flix/widgets/header/header_widget.dart';
 import 'package:filme_flix/widgets/inputs/search_input_widget.dart';
 import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
@@ -21,7 +22,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  late MovieRepository _movieRepository;
+  late SearchRepository _searchRepository;
   late TextEditingController _searchController;
   late ScrollController _scrollController;
   late SearchBloc _searchBloc;
@@ -29,11 +30,12 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    _movieRepository = MovieRepository();
+    _searchRepository = getIt<SearchRepository>();
     _searchController = TextEditingController();
     _scrollController = ScrollController();
 
-    _searchBloc = SearchBloc(movieRepository: _movieRepository);
+    _searchBloc = SearchBloc(searchRepository: _searchRepository);
+
     _searchController.addListener(_onSearchChanged);
     _scrollController.addListener(_onScroll);
 
@@ -108,6 +110,21 @@ class _SearchPageState extends State<SearchPage> {
                       itemBuilder: (context, index) {
                         return const MovieItemLoader();
                       }),
+                  SearchStateError() => Center(
+                      child: Container(
+                        margin: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.red[100],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          state.error,
+                          style: const TextStyle(color: Colors.red),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
                   _ => SizedBox.shrink(),
                 };
               },

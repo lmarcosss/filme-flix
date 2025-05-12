@@ -1,12 +1,13 @@
+import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/search/search_event.dart';
 import 'package:filme_flix/pages/search/search_state.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/repositories/search_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  MovieRepository movieRepository;
+  SearchRepository searchRepository;
 
-  SearchBloc({required this.movieRepository}) : super(SearchStateInitial()) {
+  SearchBloc({required this.searchRepository}) : super(SearchStateInitial()) {
     on<GetSetStateSearch>(_loadSetStateSearch);
   }
 
@@ -25,10 +26,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         return;
       }
 
-      final newResults = await movieRepository.searchMovies(
-        event.query,
-        currentState.currentPage + 1,
-      );
+      late List<Movie> newResults;
+
+      try {
+        newResults = await searchRepository.searchMovies(
+          event.query,
+          currentState.currentPage + 1,
+        );
+      } catch (e) {
+        emit(SearchStateError(
+          error: "Error searching for movies. Please try again.",
+        ));
+      }
 
       if (newResults.isEmpty) {
         return emit(currentState.copyWith(listIsFinished: true));
@@ -42,11 +51,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     emit(SearchStateLoading());
 
-    final results = await movieRepository.searchMovies(event.query, 1);
+    try {
+      final results = await searchRepository.searchMovies(
+        event.query,
+        1,
+      );
 
-    emit(SearchStateSuccess(
-      searchResult: results,
-      currentPage: 1,
-    ));
+      emit(SearchStateSuccess(
+        searchResult: results,
+        currentPage: 1,
+      ));
+    } catch (e) {
+      emit(SearchStateError(
+        error: "Error searching for movies. Please try again.",
+      ));
+    }
   }
 }

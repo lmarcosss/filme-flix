@@ -6,10 +6,11 @@ import 'package:filme_flix/widgets/movie_carousel/movie_carousel_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
-  HomeRepository homeRepository = HomeRepository();
+  HomeRepository homeRepository;
   final MovieCarouselTypeEnum movieType;
   MovieCarouselBloc({
     required this.movieType,
+    required this.homeRepository,
   }) : super(MovieCarouselStateInitial()) {
     on<GetSetStateMovieCarousel>(_loadSetStateMovieCarouselMovie);
   }

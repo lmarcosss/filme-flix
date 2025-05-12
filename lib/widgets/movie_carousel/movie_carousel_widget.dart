@@ -1,5 +1,7 @@
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
+import 'package:filme_flix/repositories/home_repository.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_bloc.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_event.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_item_widget.dart';
@@ -22,12 +24,16 @@ class MovieCarousel extends StatefulWidget {
 
 class _MovieCarouselState extends State<MovieCarousel> {
   late MovieCarouselBloc movieCarouselBloc;
+  late HomeRepository homeRepository;
 
   @override
   void initState() {
     super.initState();
-
-    movieCarouselBloc = MovieCarouselBloc(movieType: widget.movieType);
+    homeRepository = getIt<HomeRepository>();
+    movieCarouselBloc = MovieCarouselBloc(
+      movieType: widget.movieType,
+      homeRepository: homeRepository,
+    );
     movieCarouselBloc.add(GetSetStateMovieCarousel());
   }
 

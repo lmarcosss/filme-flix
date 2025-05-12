@@ -1,12 +1,14 @@
 import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
-import 'package:filme_flix/repositories/favorite_repository.dart';
+import 'package:filme_flix/repositories/favorites_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
-  FavoriteMovieRepository favoriteMovieRepository = FavoriteMovieRepository();
+  FavoritesRepository favoritesRepository;
 
-  MovieDetailsBloc() : super(MovieDetailsStateInitial()) {
+  MovieDetailsBloc({
+    required this.favoritesRepository,
+  }) : super(MovieDetailsStateInitial()) {
     on<GetSetStateMovieDetails>(_loadSetStateMovieIsFavorite);
     on<ToggleFavoriteMovie>(_handleFavoriteMovie);
   }
@@ -18,7 +20,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     emit(MovieDetailsStateLoading());
 
     final isFavoriteMovieFromDb =
-        await favoriteMovieRepository.isFavoriteMovie(event.movie);
+        await favoritesRepository.isFavoriteMovie(event.movie);
 
     emit(MovieDetailsStateSuccess(isFavoriteMovie: isFavoriteMovieFromDb));
   }
@@ -31,9 +33,9 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
       final successState = state as MovieDetailsStateSuccess;
 
       if (successState.isFavoriteMovie) {
-        await favoriteMovieRepository.removeFavoriteMovie(event.movie);
+        await favoritesRepository.removeFavoriteMovie(event.movie);
       } else {
-        await favoriteMovieRepository.addFavoriteMovie(event.movie);
+        await favoritesRepository.addFavoriteMovie(event.movie);
       }
 
       emit(MovieDetailsStateSuccess(

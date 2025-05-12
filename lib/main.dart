@@ -1,4 +1,5 @@
-import 'package:filme_flix/providers.dart';
+import 'package:filme_flix/get_it_config.dart';
+import 'package:filme_flix/global_providers.dart';
 import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:filme_flix/routes/router.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesRepository.init();
 
+  getItConfig();
+
   runApp(
-    providers(
+    globalProvider(
       child: const MyApp(),
     ),
   );

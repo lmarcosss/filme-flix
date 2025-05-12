@@ -8,7 +8,7 @@ import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/cache_manager_repository.dart';
 
 class MovieRepository {
-  final Dio client = Dio(
+  final Dio api = Dio(
     BaseOptions(baseUrl: AppConfig.instance.baseUrl, headers: {
       'Authorization': 'Bearer ${AppConfig.instance.apiToken}',
     }, queryParameters: {
@@ -17,7 +17,7 @@ class MovieRepository {
   );
 
   Future<List<Movie>> searchMovies(String searchText, int page) async {
-    final response = await client.get("/search/movie", queryParameters: {
+    final response = await api.get("/search/movie", queryParameters: {
       'page': page,
       'query': searchText,
     });
@@ -36,7 +36,7 @@ class MovieRepository {
       return Movie.fromJson((jsonDecode(response)));
     }
 
-    final responseByApi = await client.get("/movie/$id");
+    final responseByApi = await api.get("/movie/$id");
 
     final movie = Movie.fromJson(responseByApi.data);
 
@@ -59,8 +59,7 @@ class MovieRepository {
       return decodedData.map((movie) => Movie.fromJson(movie)).toList();
     }
 
-    final responseByApi =
-        await client.get("/movie/$endpoint", queryParameters: {
+    final responseByApi = await api.get("/movie/$endpoint", queryParameters: {
       'page': 1,
     });
 

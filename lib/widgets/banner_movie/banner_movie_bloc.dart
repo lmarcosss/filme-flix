@@ -6,10 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
-  HomeRepository homeRepository = HomeRepository();
+  HomeRepository homeRepository;
   final SharedPreferences storage = SharedPreferencesRepository.instance;
 
-  BannerBloc() : super(BannerStateInitial()) {
+  BannerBloc({
+    required this.homeRepository,
+  }) : super(BannerStateInitial()) {
     on<GetSetStateBanner>(_loadSetStateBannerMovie);
   }
 

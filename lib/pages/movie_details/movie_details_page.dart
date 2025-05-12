@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_bloc.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_event.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_state.dart';
+import 'package:filme_flix/repositories/favorites_repository.dart';
 import 'package:filme_flix/utils/date_formatter.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:filme_flix/widgets/header/header_widget.dart';
@@ -25,6 +27,7 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
+  late FavoritesRepository favoritesRepository;
   late FavoritesBloc favoritesBloc;
   late MovieDetailsBloc movieDetailsBloc;
   late Movie movie = widget.movie;
@@ -35,7 +38,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     super.initState();
 
     favoritesBloc = context.read<FavoritesBloc>();
-    movieDetailsBloc = MovieDetailsBloc();
+    favoritesRepository = getIt<FavoritesRepository>();
+    movieDetailsBloc =
+        MovieDetailsBloc(favoritesRepository: favoritesRepository);
     streamSubscription = movieDetailsBloc.stream.listen(handleState);
 
     movieDetailsBloc.add(GetSetStateMovieDetails(movie: movie));

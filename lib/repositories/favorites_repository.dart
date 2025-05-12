@@ -5,7 +5,7 @@ import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavoriteMovieRepository {
+class FavoritesRepository {
   final SharedPreferences storage = SharedPreferencesRepository.instance;
   final String key = 'favoriteMovies';
 

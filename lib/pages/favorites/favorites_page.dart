@@ -1,7 +1,8 @@
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/pages/favorites/favorites_event.dart';
 import 'package:filme_flix/pages/favorites/favorites_state.dart';
-import 'package:filme_flix/repositories/favorite_repository.dart';
+import 'package:filme_flix/repositories/favorites_repository.dart';
 import 'package:filme_flix/widgets/header/header_widget.dart';
 import 'package:filme_flix/widgets/movie_item/movie_item_loader_widget.dart';
 import 'package:filme_flix/widgets/movie_item/movie_item_widget.dart';
@@ -17,13 +18,13 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  late FavoriteMovieRepository favoriteMovieRepository;
+  late FavoritesRepository favoritesRepository;
   late FavoritesBloc favoritesBloc;
 
   @override
   void initState() {
     super.initState();
-    favoriteMovieRepository = FavoriteMovieRepository();
+    favoritesRepository = getIt<FavoritesRepository>();
     favoritesBloc = context.read<FavoritesBloc>();
 
     favoritesBloc.add(GetSetStateFavoriteMovies());
