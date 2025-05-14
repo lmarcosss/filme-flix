@@ -1,3 +1,4 @@
+import 'package:filme_flix/client/api_client.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/repositories/favorites_repository.dart';
 import 'package:filme_flix/repositories/home_repository.dart';
@@ -14,12 +15,29 @@ Future<void> getItConfig() async {
     await SharedPreferences.getInstance(),
   );
 
+  getIt.registerLazySingleton(
+    () => ApiClient(),
+  );
+
   // Repositories
-  getIt.registerFactory<HomeRepository>(() => HomeRepository());
-  getIt.registerFactory<FavoritesRepository>(() => FavoritesRepository());
-  getIt.registerFactory<SearchRepository>(() => SearchRepository());
-  getIt.registerFactory<LandingRepository>(() => LandingRepository());
+  getIt.registerFactory<HomeRepository>(
+    () => HomeRepository(getIt<ApiClient>()),
+  );
+
+  getIt.registerFactory<LandingRepository>(
+    () => LandingRepository(getIt<ApiClient>()),
+  );
+
+  getIt.registerFactory<FavoritesRepository>(
+    () => FavoritesRepository(getIt<SharedPreferences>()),
+  );
+
+  getIt.registerFactory<SearchRepository>(
+    () => SearchRepository(getIt<ApiClient>()),
+  );
 
   // Blocs
-  getIt.registerSingleton(FavoritesBloc(getIt<FavoritesRepository>()));
+  getIt.registerLazySingleton(
+    () => FavoritesBloc(getIt<FavoritesRepository>()),
+  );
 }

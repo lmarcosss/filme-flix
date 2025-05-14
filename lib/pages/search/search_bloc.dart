@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchRepository searchRepository;
+  bool _isFetching = false;
 
   SearchBloc({required this.searchRepository}) : super(SearchStateInitial()) {
     on<GetSetStateSearch>(_loadSetStateSearch);
@@ -15,6 +16,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     GetSetStateSearch event,
     Emitter<SearchState> emit,
   ) async {
+    if (_isFetching) return;
+
     if (event.query.isEmpty) {
       return emit(SearchStateInitial());
     }
@@ -25,6 +28,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (currentState.listIsFinished) {
         return;
       }
+
+      _isFetching = true;
 
       late List<Movie> newResults;
 
@@ -37,6 +42,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(SearchStateError(
           error: "Error searching for movies. Please try again.",
         ));
+      } finally {
+        _isFetching = false;
       }
 
       if (newResults.isEmpty) {

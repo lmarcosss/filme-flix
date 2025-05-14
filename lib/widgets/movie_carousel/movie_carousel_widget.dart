@@ -23,18 +23,40 @@ class MovieCarousel extends StatefulWidget {
 }
 
 class _MovieCarouselState extends State<MovieCarousel> {
-  late MovieCarouselBloc movieCarouselBloc;
-  late HomeRepository homeRepository;
+  late MovieCarouselBloc _movieCarouselBloc;
+  late HomeRepository _homeRepository;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    homeRepository = getIt<HomeRepository>();
-    movieCarouselBloc = MovieCarouselBloc(
+    _homeRepository = getIt<HomeRepository>();
+    _scrollController = ScrollController();
+    _movieCarouselBloc = MovieCarouselBloc(
       movieType: widget.movieType,
-      homeRepository: homeRepository,
+      homeRepository: _homeRepository,
     );
-    movieCarouselBloc.add(GetSetStateMovieCarousel());
+    _movieCarouselBloc.add(GetSetStateMovieCarousel());
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _movieCarouselBloc.close();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final screenEndReached = _scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 300;
+
+    if (screenEndReached) {
+      _movieCarouselBloc.add(GetSetStateMovieCarousel(
+        isLoadMore: true,
+      ));
+    }
   }
 
   @override
@@ -42,7 +64,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
     final title = widget.movieType.title;
 
     return BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
-      bloc: movieCarouselBloc,
+      bloc: _movieCarouselBloc,
       builder: (context, state) => switch (state) {
         MovieCarouselStateInitial() => const SizedBox.shrink(),
         MovieCarouselStateLoading() => CarouselLoader(title: title),
@@ -64,6 +86,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
                   height: 200,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
+                    controller: _scrollController,
                     itemCount: state.movies.length,
                     itemBuilder: (context, index) {
                       final movie = state.movies[index];

@@ -1,5 +1,9 @@
 sealed class MovieCarouselEvent {}
 
 class GetSetStateMovieCarousel extends MovieCarouselEvent {
-  GetSetStateMovieCarousel();
+  final bool isLoadMore;
+
+  GetSetStateMovieCarousel({
+    this.isLoadMore = false,
+  });
 }

@@ -1,20 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
-import 'package:filme_flix/app_config.dart';
+import 'package:filme_flix/client/api_client.dart';
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/cache_manager_repository.dart';
 
 class MovieRepository {
-  final Dio api = Dio(
-    BaseOptions(baseUrl: AppConfig.instance.baseUrl, headers: {
-      'Authorization': 'Bearer ${AppConfig.instance.apiToken}',
-    }, queryParameters: {
-      'language': 'en-US',
-    }),
-  );
+  late ApiClient api;
+
+  MovieRepository(this.api);
 
   Future<List<Movie>> searchMovies(String searchText, int page) async {
     final response = await api.get("/search/movie", queryParameters: {
@@ -50,17 +45,23 @@ class MovieRepository {
 
   Future<List<Movie>> getMoviesByEndpoint({
     required MovieCarouselTypeEnum movieType,
+    required int page,
   }) async {
     final endpoint = movieType.endpoint;
     final response = await CacheManagerRepository.get(key: endpoint);
+    final previousPage =
+        await CacheManagerRepository.get(key: "page-$endpoint");
 
-    if (response != null) {
+    if (response != null &&
+        previousPage != null &&
+        int.parse(previousPage) <= page) {
       final List<dynamic> decodedData = jsonDecode(response);
+
       return decodedData.map((movie) => Movie.fromJson(movie)).toList();
     }
 
     final responseByApi = await api.get("/movie/$endpoint", queryParameters: {
-      'page': 1,
+      'page': page,
     });
 
     final movies = (responseByApi.data['results'] as List)
@@ -69,7 +70,12 @@ class MovieRepository {
 
     await CacheManagerRepository.save(
       key: endpoint,
-      value: jsonEncode(responseByApi.data['results']),
+      value: jsonEncode([...responseByApi.data['results']]),
+    );
+
+    await CacheManagerRepository.save(
+      key: "page-$endpoint",
+      value: jsonEncode(page),
     );
 
     return movies;
