@@ -1,21 +1,15 @@
 import 'package:filme_flix/get_it_config.dart';
-import 'package:filme_flix/global_providers.dart';
-import 'package:filme_flix/repositories/shared_preferences_repository.dart';
+// import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:filme_flix/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPreferencesRepository.init();
 
-  getItConfig();
+  await getItConfig();
 
-  runApp(
-    globalProvider(
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

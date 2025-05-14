@@ -37,7 +37,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   void initState() {
     super.initState();
 
-    favoritesBloc = context.read<FavoritesBloc>();
+    favoritesBloc = getIt<FavoritesBloc>();
     favoritesRepository = getIt<FavoritesRepository>();
     movieDetailsBloc =
         MovieDetailsBloc(favoritesRepository: favoritesRepository);

@@ -25,7 +25,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   void initState() {
     super.initState();
     favoritesRepository = getIt<FavoritesRepository>();
-    favoritesBloc = context.read<FavoritesBloc>();
+    favoritesBloc = getIt<FavoritesBloc>();
 
     favoritesBloc.add(GetSetStateFavoriteMovies());
   }

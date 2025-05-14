@@ -1,14 +1,13 @@
-import 'package:filme_flix/repositories/shared_preferences_repository.dart';
+import 'package:filme_flix/get_it_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheManagerRepository {
-  static final SharedPreferences _storage =
-      SharedPreferencesRepository.instance;
+  static final SharedPreferences _storage = getIt<SharedPreferences>();
 
   static Future<void> save({
     required String key,
     required String value,
-    Duration duration = const Duration(seconds: 60),
+    Duration duration = const Duration(minutes: 3),
   }) async {
     final expiryTime = DateTime.now().add(duration).millisecondsSinceEpoch;
 

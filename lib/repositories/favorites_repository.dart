@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritesRepository {
-  final SharedPreferences storage = SharedPreferencesRepository.instance;
+  late SharedPreferences storage = getIt<SharedPreferences>();
   final String key = 'favoriteMovies';
 
   Future<List<Movie>> getFavoriteMovies() async {

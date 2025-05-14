@@ -1,13 +1,10 @@
 import 'package:filme_flix/repositories/home_repository.dart';
-import 'package:filme_flix/repositories/shared_preferences_repository.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_event.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
   HomeRepository homeRepository;
-  final SharedPreferences storage = SharedPreferencesRepository.instance;
 
   BannerBloc({
     required this.homeRepository,
