@@ -4,8 +4,26 @@ sealed class MovieCarouselState {}
 
 class MovieCarouselStateSuccess extends MovieCarouselState {
   final List<Movie> movies;
+  final int currentPage;
+  final bool listIsFinished;
 
-  MovieCarouselStateSuccess({required this.movies});
+  MovieCarouselStateSuccess({
+    required this.movies,
+    this.currentPage = 1,
+    this.listIsFinished = false,
+  });
+
+  MovieCarouselStateSuccess copyWith({
+    List<Movie>? movies,
+    int? currentPage,
+    bool? listIsFinished,
+  }) {
+    return MovieCarouselStateSuccess(
+      movies: movies ?? this.movies,
+      currentPage: currentPage ?? this.currentPage,
+      listIsFinished: listIsFinished ?? this.listIsFinished,
+    );
+  }
 }
 
 class MovieCarouselStateLoading extends MovieCarouselState {}

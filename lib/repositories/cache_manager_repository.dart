@@ -7,7 +7,7 @@ class CacheManagerRepository {
   static Future<void> save({
     required String key,
     required String value,
-    Duration duration = const Duration(minutes: 3),
+    Duration duration = const Duration(minutes: 2),
   }) async {
     final expiryTime = DateTime.now().add(duration).millisecondsSinceEpoch;
 
