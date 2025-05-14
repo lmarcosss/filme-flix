@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/landing/landing_bloc.dart';
 import 'package:filme_flix/pages/landing/landing_event.dart';
 import 'package:filme_flix/pages/landing/landing_state.dart';
 import 'package:filme_flix/pages/login/login_page.dart';
 import 'package:filme_flix/pages/sign-up/sign_up_page.dart';
+import 'package:filme_flix/repositories/landing_repository.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:filme_flix/widgets/buttons/primary_button_widget.dart';
 import 'package:filme_flix/widgets/buttons/secondary_button_widget.dart';
@@ -26,16 +28,24 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   Movie? bannerMovie;
-  late bool isBannerMovieLoading;
-  late LandingBloc landingBloc;
-  final String starWarsId = "181808";
+  late LandingBloc _landingBloc;
+  late LandingRepository _landingRepository;
+  final String _starWarsId = "181808";
 
   @override
   void initState() {
-    landingBloc = LandingBloc();
-    landingBloc.add(GetSetStateLanding(movieId: starWarsId));
+    _landingRepository = getIt<LandingRepository>();
+    _landingBloc = LandingBloc(_landingRepository);
+    _landingBloc.add(GetSetStateLanding(movieId: _starWarsId));
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _landingBloc.close();
+
+    super.dispose();
   }
 
   @override
@@ -45,7 +55,7 @@ class _LandingPageState extends State<LandingPage> {
     return Material(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       BlocBuilder(
-        bloc: landingBloc,
+        bloc: _landingBloc,
         builder: (context, state) {
           return switch (state) {
             LandingStateSuccess() => Positioned.fill(

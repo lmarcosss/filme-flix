@@ -1,12 +1,12 @@
 import 'package:filme_flix/pages/landing/landing_event.dart';
 import 'package:filme_flix/pages/landing/landing_state.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/repositories/landing_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LandingBloc extends Bloc<LandingEvent, LandingState> {
-  MovieRepository movieRepository = MovieRepository();
+  LandingRepository landingRepository;
 
-  LandingBloc() : super(LandingStateInitial()) {
+  LandingBloc(this.landingRepository) : super(LandingStateInitial()) {
     on<GetSetStateLanding>(_loadSetStateLandingBanner);
   }
 
@@ -16,7 +16,7 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   ) async {
     emit(LandingStateLoading());
 
-    final movie = await movieRepository.getMovieDetails(event.movieId);
+    final movie = await landingRepository.getMovieDetails(event.movieId);
 
     if (movie == null) {
       emit(LandingStateError(error: 'Movie not found'));

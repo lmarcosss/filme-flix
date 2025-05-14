@@ -5,9 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   FavoritesRepository favoritesRepository;
-  FavoritesBloc({
-    required this.favoritesRepository,
-  }) : super(FavoritesStateInitial()) {
+  FavoritesBloc(this.favoritesRepository) : super(FavoritesStateInitial()) {
     on<GetSetStateFavoriteMovies>(_loadSetStateFavoriteMovies);
   }
 
