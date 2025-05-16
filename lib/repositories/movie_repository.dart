@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:filme_flix/client/api_client.dart';
+import 'package:filme_flix/api/api_client.dart';
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/models/movie_model.dart';
-import 'package:filme_flix/repositories/cache_manager_repository.dart';
+import 'package:filme_flix/services/cache_manager_service.dart';
 
 class MovieRepository {
   late ApiClient api;
@@ -47,14 +47,11 @@ class MovieRepository {
     required MovieCarouselTypeEnum movieType,
     required int page,
   }) async {
+    final isFirstPage = page == 1;
     final endpoint = movieType.endpoint;
     final response = await CacheManagerRepository.get(key: endpoint);
-    final previousPage =
-        await CacheManagerRepository.get(key: "page-$endpoint");
 
-    if (response != null &&
-        previousPage != null &&
-        int.parse(previousPage) <= page) {
+    if (response != null && isFirstPage) {
       final List<dynamic> decodedData = jsonDecode(response);
 
       return decodedData.map((movie) => Movie.fromJson(movie)).toList();
@@ -68,15 +65,12 @@ class MovieRepository {
         .map((movie) => Movie.fromJson(movie))
         .toList();
 
-    await CacheManagerRepository.save(
-      key: endpoint,
-      value: jsonEncode([...responseByApi.data['results']]),
-    );
-
-    await CacheManagerRepository.save(
-      key: "page-$endpoint",
-      value: jsonEncode(page),
-    );
+    if (isFirstPage) {
+      await CacheManagerRepository.save(
+        key: endpoint,
+        value: jsonEncode([...responseByApi.data['results']]),
+      );
+    }
 
     return movies;
   }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/home_repository.dart';
@@ -9,6 +10,7 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
   HomeRepository homeRepository;
   final MovieCarouselTypeEnum movieType;
   bool _isFetching = false;
+  final String _commonErrorMessage = "Error loading movies. Please try again.";
 
   MovieCarouselBloc({
     required this.movieType,
@@ -55,9 +57,9 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
           movies: [...currentState.movies, ...newResults],
           currentPage: currentState.currentPage + 1,
         ));
-      } catch (e) {
+      } on DioException catch (e) {
         emit(MovieCarouselStateError(
-          message: "Error loading movies. Please try again.",
+          message: e.message ?? _commonErrorMessage,
         ));
       } finally {
         _isFetching = false;
@@ -70,9 +72,9 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
       final movies = await _fetchMovies(1);
 
       emit(MovieCarouselStateSuccess(movies: movies));
-    } catch (e) {
+    } on DioException catch (e) {
       return emit(MovieCarouselStateError(
-        message: "Error loading movies. Please try again.",
+        message: e.message ?? _commonErrorMessage,
       ));
     } finally {
       _isFetching = false;

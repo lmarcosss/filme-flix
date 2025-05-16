@@ -1,4 +1,4 @@
-import 'package:filme_flix/client/api_client.dart';
+import 'package:filme_flix/api/api_client.dart';
 import 'package:filme_flix/pages/favorites/favorites_bloc.dart';
 import 'package:filme_flix/repositories/favorites_repository.dart';
 import 'package:filme_flix/repositories/home_repository.dart';

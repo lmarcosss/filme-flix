@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:filme_flix/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/repositories/home_repository.dart';
+import 'package:filme_flix/services/toastr_service.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_bloc.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_event.dart';
 import 'package:filme_flix/widgets/movie_carousel/movie_carousel_item_widget.dart';
@@ -26,6 +29,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
   late MovieCarouselBloc _movieCarouselBloc;
   late HomeRepository _homeRepository;
   late ScrollController _scrollController;
+  late StreamSubscription _streamSubscription;
 
   @override
   void initState() {
@@ -38,6 +42,13 @@ class _MovieCarouselState extends State<MovieCarousel> {
     );
     _movieCarouselBloc.add(GetSetStateMovieCarousel());
     _scrollController.addListener(_onScroll);
+    _streamSubscription = _movieCarouselBloc.stream.listen((state) {
+      if (!mounted) return;
+
+      if (state is MovieCarouselStateError) {
+        ToastrService.showError(context, state.message);
+      }
+    });
   }
 
   @override
@@ -45,6 +56,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
     _movieCarouselBloc.close();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
+    _streamSubscription.cancel();
     super.dispose();
   }
 
@@ -68,7 +80,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
       builder: (context, state) => switch (state) {
         MovieCarouselStateInitial() => const SizedBox.shrink(),
         MovieCarouselStateLoading() => CarouselLoader(title: title),
-        MovieCarouselStateError() => Center(child: Text(state.message)),
+        MovieCarouselStateError() => const SizedBox.shrink(),
         MovieCarouselStateSuccess() => Padding(
             padding: const EdgeInsets.only(left: 16, right: 8, top: 16),
             child: Column(

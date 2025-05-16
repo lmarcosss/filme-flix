@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:filme_flix/get_it_config.dart';
 import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/pages/movie_details/movie_details_page.dart';
 import 'package:filme_flix/repositories/home_repository.dart';
+import 'package:filme_flix/services/toastr_service.dart';
 import 'package:filme_flix/utils/image_imdb.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_bloc.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_event.dart';
@@ -25,13 +28,30 @@ class _BannerMovieState extends State<BannerMovie> {
   late BannerBloc bannerBloc;
   late HomeRepository homeRepository;
   final String madameWebId = "634492";
+  late final StreamSubscription _subscription;
 
   @override
   void initState() {
     homeRepository = getIt<HomeRepository>();
     bannerBloc = BannerBloc(homeRepository: homeRepository);
     bannerBloc.add(GetSetStateBanner(movieId: madameWebId));
+
+    _subscription = bannerBloc.stream.listen((state) {
+      if (!mounted) return;
+
+      if (state is BannerStateError) {
+        ToastrService.showError(context, state.message);
+      }
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    bannerBloc.close();
+    super.dispose();
   }
 
   void pushToMovieDetails(Movie movie) {
@@ -47,7 +67,6 @@ class _BannerMovieState extends State<BannerMovie> {
       builder: (context, state) => switch (state) {
         BannerStateInitial() => const SizedBox.shrink(),
         BannerStateLoading() => const BannerLoader(),
-        BannerStateError() => Center(child: Text(state.message)),
         BannerStateSuccess() => InkWell(
             onTap: () => pushToMovieDetails(state.movie),
             child: CachedNetworkImage(
@@ -57,6 +76,9 @@ class _BannerMovieState extends State<BannerMovie> {
               width: size.width,
             ),
           ),
+        BannerStateError() => const SizedBox(
+            height: 500,
+          )
       },
     );
   }
