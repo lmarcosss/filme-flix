@@ -25,33 +25,35 @@ class BannerMovie extends StatefulWidget {
 }
 
 class _BannerMovieState extends State<BannerMovie> {
-  late BannerBloc bannerBloc;
-  late HomeRepository homeRepository;
-  final String madameWebId = "634492";
-  late final StreamSubscription _subscription;
+  late BannerBloc _bannerBloc;
+  late HomeRepository _homeRepository;
+  final String _madameWebId = "634492";
+  late final StreamSubscription _subscriptionError;
 
   @override
   void initState() {
-    homeRepository = getIt<HomeRepository>();
-    bannerBloc = BannerBloc(homeRepository: homeRepository);
-    bannerBloc.add(GetSetStateBanner(movieId: madameWebId));
+    _homeRepository = getIt<HomeRepository>();
+    _bannerBloc = BannerBloc(homeRepository: _homeRepository);
+    _bannerBloc.add(GetSetStateBanner(movieId: _madameWebId));
 
-    _subscription = bannerBloc.stream.listen((state) {
-      if (!mounted) return;
-
-      if (state is BannerStateError) {
-        ToastrService.showError(context, state.message);
-      }
-    });
+    _subscriptionError = _bannerBloc.stream.listen(onShowError);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _subscription.cancel();
-    bannerBloc.close();
+    _subscriptionError.cancel();
+    _bannerBloc.close();
     super.dispose();
+  }
+
+  void onShowError(state) {
+    if (!mounted) return;
+
+    if (state is BannerStateError) {
+      ToastrService.showError(context, state.message);
+    }
   }
 
   void pushToMovieDetails(Movie movie) {
@@ -63,7 +65,7 @@ class _BannerMovieState extends State<BannerMovie> {
     final size = MediaQuery.of(context).size;
 
     return BlocBuilder<BannerBloc, BannerState>(
-      bloc: bannerBloc,
+      bloc: _bannerBloc,
       builder: (context, state) => switch (state) {
         BannerStateInitial() => const SizedBox.shrink(),
         BannerStateLoading() => const BannerLoader(),

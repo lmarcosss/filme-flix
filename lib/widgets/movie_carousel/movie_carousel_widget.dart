@@ -29,7 +29,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
   late MovieCarouselBloc _movieCarouselBloc;
   late HomeRepository _homeRepository;
   late ScrollController _scrollController;
-  late StreamSubscription _streamSubscription;
+  late StreamSubscription _subscriptionError;
 
   @override
   void initState() {
@@ -42,13 +42,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
     );
     _movieCarouselBloc.add(GetSetStateMovieCarousel());
     _scrollController.addListener(_onScroll);
-    _streamSubscription = _movieCarouselBloc.stream.listen((state) {
-      if (!mounted) return;
-
-      if (state is MovieCarouselStateError) {
-        ToastrService.showError(context, state.message);
-      }
-    });
+    _subscriptionError = _movieCarouselBloc.stream.listen(onShowError);
   }
 
   @override
@@ -56,8 +50,16 @@ class _MovieCarouselState extends State<MovieCarousel> {
     _movieCarouselBloc.close();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
-    _streamSubscription.cancel();
+    _subscriptionError.cancel();
     super.dispose();
+  }
+
+  void onShowError(state) {
+    if (!mounted) return;
+
+    if (state is MovieCarouselStateError) {
+      ToastrService.showError(context, state.message);
+    }
   }
 
   void _onScroll() {
