@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/core/di/get_it_config.dart';
+import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/utils/date_formatter.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';

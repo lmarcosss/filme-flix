@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/core/di/get_it_config.dart';
+import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';

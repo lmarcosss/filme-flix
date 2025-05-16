@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:filme_flix/core/di/get_it_config.dart';
+import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
 import 'package:filme_flix/features/search/domain/repositories/search_repository.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_bloc.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_event.dart';

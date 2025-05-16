@@ -1,4 +1,4 @@
-import 'package:filme_flix/core/di/get_it_config.dart';
+import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
 import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.dart';

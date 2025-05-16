@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt getIt = GetIt.instance;
 
-Future<void> getItConfig() async {
+Future<void> getDependencyInjectionConfig() async {
   // Services
   getIt.registerSingleton<SharedPreferences>(
     await SharedPreferences.getInstance(),
