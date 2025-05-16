@@ -29,17 +29,17 @@ Future<void> getItConfig() async {
   );
 
   // Repositories
+  getIt.registerFactory<LandingRepository>(
+    () =>
+        LandingRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
+  );
+
   getIt.registerFactory<FavoritesRepository>(
     () => FavoritesRepositoryImpl(getIt<SharedPreferences>()),
   );
 
   getIt.registerFactory<HomeRepository>(
     () => HomeRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
-  );
-
-  getIt.registerFactory<LandingRepository>(
-    () =>
-        LandingRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
   );
 
   getIt.registerFactory<SearchRepository>(
@@ -49,6 +49,6 @@ Future<void> getItConfig() async {
 
   // Blocs
   getIt.registerLazySingleton(
-    () => FavoritesBloc(getIt<FavoritesRepositoryImpl>()),
+    () => FavoritesBloc(getIt<FavoritesRepository>()),
   );
 }

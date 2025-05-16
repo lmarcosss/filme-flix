@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:filme_flix/core/di/get_it_config.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
-import 'package:filme_flix/features/home/data/repositories/home_repository_impl.dart';
+import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/features/home/presentation/widgets/movie_carousel/movie_carousel_bloc.dart';
 import 'package:filme_flix/features/home/presentation/widgets/movie_carousel/movie_carousel_event.dart';
@@ -27,14 +27,14 @@ class MovieCarousel extends StatefulWidget {
 
 class _MovieCarouselState extends State<MovieCarousel> {
   late MovieCarouselBloc _movieCarouselBloc;
-  late HomeRepositoryImpl _homeRepository;
+  late HomeRepository _homeRepository;
   late ScrollController _scrollController;
   late StreamSubscription _subscriptionError;
 
   @override
   void initState() {
     super.initState();
-    _homeRepository = getIt<HomeRepositoryImpl>();
+    _homeRepository = getIt<HomeRepository>();
     _scrollController = ScrollController();
     _movieCarouselBloc = MovieCarouselBloc(
       movieType: widget.movieType,

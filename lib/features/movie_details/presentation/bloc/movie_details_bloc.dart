@@ -1,10 +1,10 @@
-import 'package:filme_flix/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_event.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
-  FavoritesRepositoryImpl favoritesRepository;
+  FavoritesRepository favoritesRepository;
 
   MovieDetailsBloc({
     required this.favoritesRepository,

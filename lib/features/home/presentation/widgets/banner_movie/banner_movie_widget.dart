@@ -5,7 +5,7 @@ import 'package:filme_flix/core/di/get_it_config.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
-import 'package:filme_flix/features/home/data/repositories/home_repository_impl.dart';
+import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/widgets/banner_movie/banner_movie_bloc.dart';
 import 'package:filme_flix/features/home/presentation/widgets/banner_movie/banner_movie_event.dart';
 import 'package:filme_flix/features/home/presentation/widgets/banner_movie/banner_movie_state.dart';
@@ -26,13 +26,13 @@ class BannerMovie extends StatefulWidget {
 
 class _BannerMovieState extends State<BannerMovie> {
   late BannerBloc _bannerBloc;
-  late HomeRepositoryImpl _homeRepository;
+  late HomeRepository _homeRepository;
   final String _madameWebId = "634492";
   late final StreamSubscription _subscriptionError;
 
   @override
   void initState() {
-    _homeRepository = getIt<HomeRepositoryImpl>();
+    _homeRepository = getIt<HomeRepository>();
     _bannerBloc = BannerBloc(homeRepository: _homeRepository);
     _bannerBloc.add(GetSetStateBanner(movieId: _madameWebId));
 

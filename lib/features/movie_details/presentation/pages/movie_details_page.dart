@@ -5,7 +5,7 @@ import 'package:filme_flix/core/di/get_it_config.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/utils/date_formatter.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
-import 'package:filme_flix/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_bloc.dart';
@@ -27,7 +27,7 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
-  late FavoritesRepositoryImpl favoritesRepository;
+  late FavoritesRepository favoritesRepository;
   late FavoritesBloc favoritesBloc;
   late MovieDetailsBloc movieDetailsBloc;
   late Movie movie = widget.movie;
@@ -38,7 +38,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     super.initState();
 
     favoritesBloc = getIt<FavoritesBloc>();
-    favoritesRepository = getIt<FavoritesRepositoryImpl>();
+    favoritesRepository = getIt<FavoritesRepository>();
     movieDetailsBloc =
         MovieDetailsBloc(favoritesRepository: favoritesRepository);
     streamSubscription = movieDetailsBloc.stream.listen(handleState);

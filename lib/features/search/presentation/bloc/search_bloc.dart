@@ -1,11 +1,11 @@
 import 'package:filme_flix/core/models/movie_model.dart';
-import 'package:filme_flix/features/search/data/repositories/search_repository_impl.dart';
+import 'package:filme_flix/features/search/domain/repositories/search_repository.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_event.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchRepositoryImpl searchRepository;
+  SearchRepository searchRepository;
   bool _isFetching = false;
 
   SearchBloc({required this.searchRepository}) : super(SearchStateInitial()) {

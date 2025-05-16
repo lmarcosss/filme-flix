@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
-import 'package:filme_flix/features/home/data/repositories/home_repository_impl.dart';
+import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/enums/movie_carousel_type_enum.dart';
 import 'package:filme_flix/features/home/presentation/widgets/movie_carousel/movie_carousel_event.dart';
 import 'package:filme_flix/features/home/presentation/widgets/movie_carousel/movie_carousel_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
-  HomeRepositoryImpl homeRepository;
+  HomeRepository homeRepository;
   final MovieCarouselTypeEnum movieType;
   bool _isFetching = false;
   final String _commonErrorMessage = "Error loading movies. Please try again.";

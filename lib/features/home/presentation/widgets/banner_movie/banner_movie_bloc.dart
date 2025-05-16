@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
-import 'package:filme_flix/features/home/data/repositories/home_repository_impl.dart';
+import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/widgets/banner_movie/banner_movie_event.dart';
 import 'package:filme_flix/features/home/presentation/widgets/banner_movie/banner_movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
-  HomeRepositoryImpl homeRepository;
+  HomeRepository homeRepository;
 
   BannerBloc({
     required this.homeRepository,

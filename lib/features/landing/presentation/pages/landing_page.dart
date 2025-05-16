@@ -3,7 +3,7 @@ import 'package:filme_flix/core/di/get_it_config.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
-import 'package:filme_flix/features/landing/data/repositories/landing_repository_impl.dart';
+import 'package:filme_flix/features/landing/domain/repositories/landing_repository.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_bloc.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_event.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_state.dart';
@@ -30,12 +30,12 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   Movie? bannerMovie;
   late LandingBloc _landingBloc;
-  late LandingRepositoryImpl _landingRepository;
+  late LandingRepository _landingRepository;
   final String _starWarsId = "181808";
 
   @override
   void initState() {
-    _landingRepository = getIt<LandingRepositoryImpl>();
+    _landingRepository = getIt<LandingRepository>();
     _landingBloc = LandingBloc(_landingRepository);
     _landingBloc.add(GetSetStateLanding(movieId: _starWarsId));
 

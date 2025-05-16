@@ -1,5 +1,5 @@
 import 'package:filme_flix/core/di/get_it_config.dart';
-import 'package:filme_flix/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_state.dart';
@@ -18,13 +18,13 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  late FavoritesRepositoryImpl favoritesRepository;
+  late FavoritesRepository favoritesRepository;
   late FavoritesBloc favoritesBloc;
 
   @override
   void initState() {
     super.initState();
-    favoritesRepository = getIt<FavoritesRepositoryImpl>();
+    favoritesRepository = getIt<FavoritesRepository>();
     favoritesBloc = getIt<FavoritesBloc>();
 
     favoritesBloc.add(GetSetStateFavoriteMovies());

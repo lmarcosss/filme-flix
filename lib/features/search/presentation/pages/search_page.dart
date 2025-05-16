@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:filme_flix/core/di/get_it_config.dart';
-import 'package:filme_flix/features/search/data/repositories/search_repository_impl.dart';
+import 'package:filme_flix/features/search/domain/repositories/search_repository.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_bloc.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_event.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_state.dart';
@@ -22,7 +22,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  late SearchRepositoryImpl _searchRepository;
+  late SearchRepository _searchRepository;
   late TextEditingController _searchController;
   late ScrollController _scrollController;
   late SearchBloc _searchBloc;
@@ -30,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    _searchRepository = getIt<SearchRepositoryImpl>();
+    _searchRepository = getIt<SearchRepository>();
     _searchController = TextEditingController();
     _scrollController = ScrollController();
 
