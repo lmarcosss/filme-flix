@@ -11,9 +11,9 @@ class LandingStateSuccess extends LandingState {
 class LandingStateLoading extends LandingState {}
 
 class LandingStateError extends LandingState {
-  final String error;
+  final String message;
 
-  LandingStateError({required this.error});
+  LandingStateError({required this.message});
 }
 
 class LandingStateInitial extends LandingState {}

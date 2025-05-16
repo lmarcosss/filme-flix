@@ -1,4 +1,5 @@
 import 'package:dio/io.dart';
+import 'package:filme_flix/api/api_interceptor_error.dart';
 import 'package:filme_flix/app_config.dart';
 
 class ApiClient extends DioForNative {
@@ -7,5 +8,7 @@ class ApiClient extends DioForNative {
     options.headers = {
       'Authorization': 'Bearer ${AppConfig.instance.apiToken}',
     };
+
+    interceptors.add(ApiInterceptorError());
   }
 }

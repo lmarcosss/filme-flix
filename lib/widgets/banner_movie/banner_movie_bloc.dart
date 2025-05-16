@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:filme_flix/models/movie_model.dart';
 import 'package:filme_flix/repositories/home_repository.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_event.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_state.dart';
@@ -18,12 +20,15 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   ) async {
     emit(BannerStateLoading());
 
-    final bannerMovie = await homeRepository.getBannerMovie(event.movieId);
+    late Movie? bannerMovie;
 
-    if (bannerMovie == null) {
-      return emit(BannerStateError(message: 'Failed to load movie details'));
+    try {
+      bannerMovie = await homeRepository.getBannerMovie(event.movieId);
+
+      emit(BannerStateSuccess(movie: bannerMovie!));
+    } on DioException catch (e) {
+      final message = e.message ?? "Erro ao carregar o banner";
+      emit(BannerStateError(message: message));
     }
-
-    emit(BannerStateSuccess(movie: bannerMovie));
   }
 }
