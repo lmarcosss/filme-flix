@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class ApiError extends Interceptor {
+class ApiInterceptorError extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response != null && err.response?.data != null) {
