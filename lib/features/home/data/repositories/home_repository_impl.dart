@@ -1,9 +1,9 @@
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/enums/movie_carousel_type_enum.dart';
-import 'package:filme_flix/shared/data/repositories/movie_repository.dart';
+import 'package:filme_flix/shared/data/repositories/movie_repository_impl.dart';
 
-class HomeRepositoryImpl extends MovieRepository implements HomeRepository {
+class HomeRepositoryImpl extends MovieRepositoryImpl implements HomeRepository {
   HomeRepositoryImpl(super.api, super.cacheManagerService);
 
   @override

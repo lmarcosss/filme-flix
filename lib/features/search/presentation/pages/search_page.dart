@@ -5,10 +5,10 @@ import 'package:filme_flix/features/search/domain/repositories/search_repository
 import 'package:filme_flix/features/search/presentation/bloc/search_bloc.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_event.dart';
 import 'package:filme_flix/features/search/presentation/bloc/search_state.dart';
-import 'package:filme_flix/shared/widgets/header/header_widget.dart';
-import 'package:filme_flix/shared/widgets/inputs/search_input_widget.dart';
-import 'package:filme_flix/shared/widgets/movie_item/movie_item_loader_widget.dart';
-import 'package:filme_flix/shared/widgets/movie_item/movie_item_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/header/header_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/inputs/search_input_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/movie_item/movie_item_loader_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/movie_item/movie_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

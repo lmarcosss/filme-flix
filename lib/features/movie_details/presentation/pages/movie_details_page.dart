@@ -11,7 +11,7 @@ import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_bloc.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_event.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_state.dart';
-import 'package:filme_flix/shared/widgets/header/header_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/header/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';

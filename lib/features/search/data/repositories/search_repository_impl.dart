@@ -1,8 +1,9 @@
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/features/search/domain/repositories/search_repository.dart';
-import 'package:filme_flix/shared/data/repositories/movie_repository.dart';
+import 'package:filme_flix/shared/data/repositories/movie_repository_impl.dart';
 
-class SearchRepositoryImpl extends MovieRepository implements SearchRepository {
+class SearchRepositoryImpl extends MovieRepositoryImpl
+    implements SearchRepository {
   SearchRepositoryImpl(super.api, super.cacheManagerService);
 
   @override

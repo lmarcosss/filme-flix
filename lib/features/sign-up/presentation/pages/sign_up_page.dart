@@ -1,7 +1,7 @@
 import 'package:filme_flix/features/login/presentation/pages/login_page.dart';
-import 'package:filme_flix/shared/widgets/buttons/primary_button_widget.dart';
-import 'package:filme_flix/shared/widgets/inputs/common_input_widget.dart';
-import 'package:filme_flix/shared/widgets/inputs/password_input_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/buttons/primary_button_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/inputs/common_input_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/inputs/password_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

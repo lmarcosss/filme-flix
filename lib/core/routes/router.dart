@@ -7,7 +7,7 @@ import 'package:filme_flix/features/movie_details/presentation/pages/movie_detai
 import 'package:filme_flix/features/search/presentation/pages/search_page.dart';
 import 'package:filme_flix/features/settings/presentation/pages/settings_page.dart';
 import 'package:filme_flix/features/sign-up/presentation/pages/sign_up_page.dart';
-import 'package:filme_flix/shared/widgets/nav_bar/logged_nav_bar_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/nav_bar/logged_nav_bar_widget.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(

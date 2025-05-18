@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/utils/date_formatter.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
 import 'package:filme_flix/features/movie_details/presentation/pages/movie_details_page.dart';
-import 'package:filme_flix/shared/widgets/movie_item/movie_item_loader_widget.dart';
+import 'package:filme_flix/shared/presentation/widgets/movie_item/movie_item_loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

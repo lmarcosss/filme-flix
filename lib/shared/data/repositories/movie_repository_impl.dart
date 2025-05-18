@@ -5,11 +5,11 @@ import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/network/api_client.dart';
 import 'package:filme_flix/core/services/storage/cache_manager_service.dart';
 
-class MovieRepository {
+class MovieRepositoryImpl {
   late ApiClient api;
   late CacheManagerService cacheManagerService;
 
-  MovieRepository(this.api, this.cacheManagerService);
+  MovieRepositoryImpl(this.api, this.cacheManagerService);
 
   Future<List<Movie>> searchMovies(String searchText, int page) async {
     final response = await api.get("/search/movie", queryParameters: {
