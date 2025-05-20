@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
+import 'package:filme_flix/core/injection/locator.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
+import 'package:filme_flix/core/widgets/buttons/primary_button_widget.dart';
+import 'package:filme_flix/core/widgets/buttons/secondary_button_widget.dart';
 import 'package:filme_flix/features/landing/domain/repositories/landing_repository.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_bloc.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_event.dart';
 import 'package:filme_flix/features/landing/presentation/bloc/landing_state.dart';
 import 'package:filme_flix/features/login/presentation/pages/login_page.dart';
 import 'package:filme_flix/features/sign-up/presentation/pages/sign_up_page.dart';
-import 'package:filme_flix/shared/presentation/widgets/buttons/primary_button_widget.dart';
-import 'package:filme_flix/shared/presentation/widgets/buttons/secondary_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +28,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  Movie? bannerMovie;
+  MovieModel? bannerMovie;
   late LandingBloc _landingBloc;
   late LandingRepository _landingRepository;
   final String _starWarsId = "181808";

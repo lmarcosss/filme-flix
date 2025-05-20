@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
+import 'package:filme_flix/core/injection/locator.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
@@ -56,7 +56,7 @@ class _BannerMovieState extends State<BannerMovie> {
     }
   }
 
-  void pushToMovieDetails(Movie movie) {
+  void pushToMovieDetails(MovieModel movie) {
     context.push(MovieDetailsPage.route, extra: {"movie": movie});
   }
 

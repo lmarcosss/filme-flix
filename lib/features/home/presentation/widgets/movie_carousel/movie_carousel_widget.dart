@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
+import 'package:filme_flix/core/injection/locator.dart';
 import 'package:filme_flix/core/services/toastr/toastr_service.dart';
 import 'package:filme_flix/features/home/domain/repositories/home_repository.dart';
 import 'package:filme_flix/features/home/presentation/enums/movie_carousel_type_enum.dart';

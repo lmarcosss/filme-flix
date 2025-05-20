@@ -1,22 +1,17 @@
-class Movie {
-  final int id;
-  final String title;
-  final String posterPath;
-  final String backdropPath;
-  final String overview;
-  final String? releaseDate;
+import 'package:filme_flix/core/entities/movie_entity.dart';
 
-  Movie({
-    required this.id,
-    required this.title,
-    required this.posterPath,
-    required this.backdropPath,
-    this.releaseDate,
-    required this.overview,
+class MovieModel extends MovieEntity {
+  MovieModel({
+    required super.id,
+    required super.title,
+    required super.posterPath,
+    required super.backdropPath,
+    super.releaseDate,
+    required super.overview,
   });
 
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
       id: json['id'],
       title: json['title'],
       posterPath: json['poster_path'] ?? "",

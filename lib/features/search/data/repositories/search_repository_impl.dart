@@ -1,13 +1,13 @@
+import 'package:filme_flix/core/api/movie_api.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/features/search/domain/repositories/search_repository.dart';
-import 'package:filme_flix/shared/data/repositories/movie_repository_impl.dart';
 
-class SearchRepositoryImpl extends MovieRepositoryImpl
-    implements SearchRepository {
-  SearchRepositoryImpl(super.api, super.cacheManagerService);
+class SearchRepositoryImpl implements SearchRepository {
+  final MovieApi api;
+  SearchRepositoryImpl({required this.api});
 
   @override
-  Future<List<Movie>> searchMovies(String searchText, int page) async {
-    return await super.searchMovies(searchText, page);
+  Future<List<MovieModel>> searchMovies(String searchText, int page) async {
+    return await api.searchMovies(searchText, page);
   }
 }

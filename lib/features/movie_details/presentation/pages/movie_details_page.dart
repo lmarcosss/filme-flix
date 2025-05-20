@@ -1,24 +1,24 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
+import 'package:filme_flix/core/injection/locator.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/core/utils/date_formatter.dart';
 import 'package:filme_flix/core/utils/image_imdb.dart';
+import 'package:filme_flix/core/widgets/header/header_widget.dart';
 import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_bloc.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_event.dart';
 import 'package:filme_flix/features/movie_details/presentation/bloc/movie_details_state.dart';
-import 'package:filme_flix/shared/presentation/widgets/header/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   static const String route = "/movie-details";
-  final Movie movie;
+  final MovieModel movie;
 
   const MovieDetailsPage({super.key, required this.movie});
 
@@ -30,7 +30,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   late FavoritesRepository favoritesRepository;
   late FavoritesBloc favoritesBloc;
   late MovieDetailsBloc movieDetailsBloc;
-  late Movie movie = widget.movie;
+  late MovieModel movie = widget.movie;
   late StreamSubscription<MovieDetailsState> streamSubscription;
 
   @override

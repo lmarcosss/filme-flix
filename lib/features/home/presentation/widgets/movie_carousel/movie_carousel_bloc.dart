@@ -19,7 +19,7 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
     on<GetSetStateMovieCarousel>(_loadSetStateMovieCarouselMovie);
   }
 
-  Future<List<Movie>> _fetchMovies(int page) async {
+  Future<List<MovieModel>> _fetchMovies(int page) async {
     switch (movieType) {
       case MovieCarouselTypeEnum.nowPlaying:
         return await homeRepository.getNowPlayingMovies(page);

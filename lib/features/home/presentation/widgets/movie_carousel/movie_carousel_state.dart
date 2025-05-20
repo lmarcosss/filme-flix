@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 sealed class MovieCarouselState {}
 
 class MovieCarouselStateSuccess extends MovieCarouselState {
-  final List<Movie> movies;
+  final List<MovieModel> movies;
   final int currentPage;
   final bool listIsFinished;
 
@@ -14,7 +14,7 @@ class MovieCarouselStateSuccess extends MovieCarouselState {
   });
 
   MovieCarouselStateSuccess copyWith({
-    List<Movie>? movies,
+    List<MovieModel>? movies,
     int? currentPage,
     bool? listIsFinished,
   }) {

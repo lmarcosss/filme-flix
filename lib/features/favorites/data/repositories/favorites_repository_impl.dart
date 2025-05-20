@@ -12,7 +12,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   FavoritesRepositoryImpl(this.storage);
 
   @override
-  Future<List<Movie>> getFavoriteMovies() async {
+  Future<List<MovieModel>> getFavoriteMovies() async {
     final movies = storage.getStringList(key);
 
     if (movies == null || movies.isEmpty) {
@@ -20,13 +20,13 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     }
 
     final formattedMovies =
-        movies.map((movie) => Movie.fromJson(jsonDecode(movie))).toList();
+        movies.map((movie) => MovieModel.fromJson(jsonDecode(movie))).toList();
 
     return formattedMovies;
   }
 
   @override
-  Future<void> addFavoriteMovie(Movie movie) async {
+  Future<void> addFavoriteMovie(MovieModel movie) async {
     final movies = await getFavoriteMovies();
     movies.add(movie);
 
@@ -37,7 +37,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-  Future<void> removeFavoriteMovie(Movie movie) async {
+  Future<void> removeFavoriteMovie(MovieModel movie) async {
     final movies = await getFavoriteMovies();
     movies.removeWhere((item) => item.id == movie.id);
 
@@ -48,7 +48,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-  Future<bool> isFavoriteMovie(Movie movie) async {
+  Future<bool> isFavoriteMovie(MovieModel movie) async {
     final movies = await getFavoriteMovies();
 
     return movies.any((item) => item.id == movie.id);

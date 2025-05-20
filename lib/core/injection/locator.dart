@@ -1,4 +1,5 @@
-import 'package:filme_flix/core/network/api_client.dart';
+import 'package:filme_flix/core/api/movie_api.dart';
+import 'package:filme_flix/core/client/api_client.dart';
 import 'package:filme_flix/core/services/storage/cache_manager_service.dart';
 import 'package:filme_flix/features/favorites/data/repositories/favorites_repository_impl.dart';
 import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
@@ -14,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt getIt = GetIt.instance;
 
-Future<void> getDependencyInjectionConfig() async {
+Future<void> setupLocator() async {
   // Services
   getIt.registerSingleton<SharedPreferences>(
     await SharedPreferences.getInstance(),
@@ -28,23 +29,28 @@ Future<void> getDependencyInjectionConfig() async {
     () => CacheManagerService(getIt<SharedPreferences>()),
   );
 
+  getIt.registerFactory(
+    () => MovieApi(
+      api: getIt<ApiClient>(),
+      cacheManagerService: getIt<CacheManagerService>(),
+    ),
+  );
+
   // Repositories
   getIt.registerFactory<LandingRepository>(
-    () =>
-        LandingRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
+    () => LandingRepositoryImpl(api: getIt<MovieApi>()),
+  );
+
+  getIt.registerFactory<HomeRepository>(
+    () => HomeRepositoryImpl(api: getIt<MovieApi>()),
+  );
+
+  getIt.registerFactory<SearchRepository>(
+    () => SearchRepositoryImpl(api: getIt<MovieApi>()),
   );
 
   getIt.registerFactory<FavoritesRepository>(
     () => FavoritesRepositoryImpl(getIt<SharedPreferences>()),
-  );
-
-  getIt.registerFactory<HomeRepository>(
-    () => HomeRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
-  );
-
-  getIt.registerFactory<SearchRepository>(
-    () =>
-        SearchRepositoryImpl(getIt<ApiClient>(), getIt<CacheManagerService>()),
   );
 
   // Blocs

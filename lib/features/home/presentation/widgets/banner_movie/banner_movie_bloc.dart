@@ -20,7 +20,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   ) async {
     emit(BannerStateLoading());
 
-    late Movie? bannerMovie;
+    late MovieModel? bannerMovie;
 
     try {
       bannerMovie = await homeRepository.getBannerMovie(event.movieId);

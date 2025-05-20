@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 sealed class LandingState {}
 
 class LandingStateSuccess extends LandingState {
-  Movie bannerMovie;
+  MovieModel bannerMovie;
 
   LandingStateSuccess({required this.bannerMovie});
 }

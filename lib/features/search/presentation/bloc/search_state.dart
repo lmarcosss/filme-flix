@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 sealed class SearchState {}
 
 class SearchStateSuccess extends SearchState {
-  List<Movie> searchResult;
+  List<MovieModel> searchResult;
   int currentPage;
   bool listIsFinished;
 
@@ -14,7 +14,7 @@ class SearchStateSuccess extends SearchState {
   });
 
   SearchStateSuccess copyWith({
-    List<Movie>? searchResult,
+    List<MovieModel>? searchResult,
     int? currentPage,
     bool? listIsFinished,
   }) {
@@ -35,5 +35,5 @@ class SearchStateError extends SearchState {
 }
 
 class SearchStateInitial extends SearchState {
-  List<Movie> searchResult = [];
+  List<MovieModel> searchResult = [];
 }

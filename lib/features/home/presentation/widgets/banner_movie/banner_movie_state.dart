@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 sealed class BannerState {}
 
 class BannerStateSuccess extends BannerState {
-  final Movie movie;
+  final MovieModel movie;
 
   BannerStateSuccess({required this.movie});
 }

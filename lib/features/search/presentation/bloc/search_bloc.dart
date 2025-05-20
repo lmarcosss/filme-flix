@@ -31,7 +31,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       _isFetching = true;
 
-      late List<Movie> newResults;
+      late List<MovieModel> newResults;
 
       try {
         newResults = await searchRepository.searchMovies(

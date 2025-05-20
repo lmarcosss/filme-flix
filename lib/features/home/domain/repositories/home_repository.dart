@@ -1,13 +1,13 @@
 import 'package:filme_flix/core/models/movie_model.dart';
 
 abstract class HomeRepository {
-  Future<Movie?> getBannerMovie(String id);
+  Future<MovieModel?> getBannerMovie(String id);
 
-  Future<List<Movie>> getNowPlayingMovies(int page);
+  Future<List<MovieModel>> getNowPlayingMovies(int page);
 
-  Future<List<Movie>> getPopularMovies(int page);
+  Future<List<MovieModel>> getPopularMovies(int page);
 
-  Future<List<Movie>> getTopRatedMovies(int page);
+  Future<List<MovieModel>> getTopRatedMovies(int page);
 
-  Future<List<Movie>> getUpcomingMovies(int page);
+  Future<List<MovieModel>> getUpcomingMovies(int page);
 }

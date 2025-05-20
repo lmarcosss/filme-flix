@@ -1,13 +1,13 @@
+import 'package:filme_flix/core/api/movie_api.dart';
 import 'package:filme_flix/core/models/movie_model.dart';
 import 'package:filme_flix/features/landing/domain/repositories/landing_repository.dart';
-import 'package:filme_flix/shared/data/repositories/movie_repository_impl.dart';
 
-class LandingRepositoryImpl extends MovieRepositoryImpl
-    implements LandingRepository {
-  LandingRepositoryImpl(super.api, super.cacheManagerService);
+class LandingRepositoryImpl implements LandingRepository {
+  final MovieApi api;
+  LandingRepositoryImpl({required this.api});
 
   @override
-  Future<Movie?> getBannerMovie(String id) async {
-    return super.getMovieDetails(id);
+  Future<MovieModel?> getBannerMovie(String id) async {
+    return api.getMovieDetails(id);
   }
 }

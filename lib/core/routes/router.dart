@@ -1,4 +1,5 @@
 import 'package:filme_flix/core/models/movie_model.dart';
+import 'package:filme_flix/core/widgets/nav_bar/logged_nav_bar_widget.dart';
 import 'package:filme_flix/features/favorites/presentation/pages/favorites_page.dart';
 import 'package:filme_flix/features/home/presentation/pages/home_page.dart';
 import 'package:filme_flix/features/landing/presentation/pages/landing_page.dart';
@@ -7,7 +8,6 @@ import 'package:filme_flix/features/movie_details/presentation/pages/movie_detai
 import 'package:filme_flix/features/search/presentation/pages/search_page.dart';
 import 'package:filme_flix/features/settings/presentation/pages/settings_page.dart';
 import 'package:filme_flix/features/sign-up/presentation/pages/sign_up_page.dart';
-import 'package:filme_flix/shared/presentation/widgets/nav_bar/logged_nav_bar_widget.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -69,7 +69,7 @@ final router = GoRouter(
       path: MovieDetailsPage.route,
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>;
-        final movie = extra["movie"] as Movie;
+        final movie = extra["movie"] as MovieModel;
 
         return MovieDetailsPage(movie: movie);
       },

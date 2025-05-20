@@ -3,7 +3,7 @@ import 'package:filme_flix/core/models/movie_model.dart';
 sealed class FavoritesState {}
 
 class FavoritesStateSuccess extends FavoritesState {
-  final List<Movie> favoriteMovies;
+  final List<MovieModel> favoriteMovies;
 
   FavoritesStateSuccess({required this.favoriteMovies});
 }

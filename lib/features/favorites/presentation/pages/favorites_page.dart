@@ -1,11 +1,11 @@
-import 'package:filme_flix/core/dependency_injection/dependency_injection_config.dart';
+import 'package:filme_flix/core/injection/locator.dart';
+import 'package:filme_flix/core/widgets/header/header_widget.dart';
+import 'package:filme_flix/core/widgets/movie_item/movie_item_loader_widget.dart';
+import 'package:filme_flix/core/widgets/movie_item/movie_item_widget.dart';
 import 'package:filme_flix/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:filme_flix/features/favorites/presentation/bloc/favorites_state.dart';
-import 'package:filme_flix/shared/presentation/widgets/header/header_widget.dart';
-import 'package:filme_flix/shared/presentation/widgets/movie_item/movie_item_loader_widget.dart';
-import 'package:filme_flix/shared/presentation/widgets/movie_item/movie_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
