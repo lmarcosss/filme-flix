@@ -1,6 +1,7 @@
 import 'package:filme_flix/core/widgets/buttons/primary_button_widget.dart';
 import 'package:filme_flix/core/widgets/inputs/common_input_widget.dart';
 import 'package:filme_flix/core/widgets/inputs/password_input_widget.dart';
+import 'package:filme_flix/features/home/presentation/pages/home_page.dart';
 import 'package:filme_flix/features/login/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +14,10 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+
+    void onSignUp() {
+      context.go(HomePage.route);
+    }
 
     return Material(
         child: Column(
@@ -41,7 +46,7 @@ class SignUpPage extends StatelessWidget {
         SizedBox(height: 8),
         PasswordInput(text: "Password"),
         PrimaryButton(
-            onPressed: () {},
+            onPressed: onSignUp,
             text: "Create Account",
             padding: EdgeInsets.only(left: 16, right: 16, top: 16)),
         Row(
