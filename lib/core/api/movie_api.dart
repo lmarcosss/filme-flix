@@ -27,8 +27,8 @@ class MovieApi {
           .toList();
 
       return movies;
-    } on DioException catch (_) {
-      throw Exception("Isn't possible to search movies.");
+    } on DioException catch (e) {
+      throw Exception(e.message ?? "Isn't possible to search movies.");
     }
   }
 
@@ -50,8 +50,8 @@ class MovieApi {
       );
 
       return MovieModel.fromJson(responseByApi.data);
-    } on DioException catch (_) {
-      throw Exception("Isn't possible to get movie details.");
+    } on DioException catch (e) {
+      throw Exception(e.message ?? "Isn't possible to get movie details.");
     }
   }
 
@@ -85,8 +85,8 @@ class MovieApi {
       }
 
       return movies;
-    } on DioException catch (_) {
-      throw Exception("Isn't possible to get movies.");
+    } on DioException catch (e) {
+      throw Exception(e.message ?? "Isn't possible to get movies.");
     }
   }
 }
